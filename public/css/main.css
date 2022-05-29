@@ -1,0 +1,27 @@
+body{
+    font-family: 'Copse', serif;
+    color: #44586e;
+}
+
+hr{
+    border: 1px solid #44586e;
+    margin: 2% 20%;
+}
+
+.perso_policeTitre{font-family: 'Fredoka One', cursive;}
+.perso_shadow{box-shadow: 0px 2px 15px hsl(211, 24%, 35%);}
+.perso_logoSize{width: 100px;height: 100px;}
+.perso_ColorGreyMenu{color: #605e5e;}
+.perso_ColorRoseMenu{color: #ff00ff !important;}
+.perso_ColorOrangeMenu{color: #ffa500 !important;}
+.perso_ColorVertMenu{color: #00ff00 !important;}   
+.perso_ColorRougeMenu{color: #ff0000 !important;}
+.perso_ColorBleuMenu{color: #0542db !important;}
+.perso_size20{font-size: 20px;}
+.perso_size12{font-size: 12px;}
+.perso_minCorpSize{min-height: 500px;}
+.perso_textShadow{text-shadow: 1px 1px 1px #44586e;}
+.perso_bgGreen{background-color: #c9e5b7 !important;}
+.perso_bgOrange{background-color: #f5f290 !important;}
+.perso_bgBleu{background-color: #a5a5f6 !important;}
+.perso_bgRose{background-color: #f2c2f2 !important;}
