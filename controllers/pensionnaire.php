@@ -1,8 +1,8 @@
 <?php
-require_once("../Global/pdo.php");
-require_once("../Global/animal.dao.php");
-require_once("../../utile/config.php");
+require_once("../models/animal.dao.php");
+require_once("../config/config.php");
 
+$_GET['id_statut']=1;//à supprimer
 $animaux = getAnimalFromStatus($_GET['id_statut']);
 
 $titreH1 = "";
@@ -15,5 +15,4 @@ foreach($animaux as $key => $animal){
     $animaux[$key]['image'] = $image;
     $animaux[$key]['caracteres'] = getCaracteresFromAnimal($animal['id_animal']);
 }
-
-require_once "pensionnaire.view.php";
+require_once "../views/pensionnaire.view.php";

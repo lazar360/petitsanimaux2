@@ -1,5 +1,5 @@
 <?php
-require_once("../Global/pdo.php");
+require_once("pdo.php");
 
 function getAnimalFromStatus($idStatut) {
     $bdd = connexionPDO();
