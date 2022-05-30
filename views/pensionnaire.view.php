@@ -1,5 +1,5 @@
 <?php include("header.php"); 
-require_once("../controllers/pensionnaire.php");
+//require_once("../controllers/pensionnaire.php");
 ?>
 
 <?= styleTitreNiveau1($titreH1, COLOR_PENSIONNAIRE) ?>
@@ -10,7 +10,7 @@ require_once("../controllers/pensionnaire.php");
         <div class="col-12 col-lg-6">
             <div class="row border-dark rounded-lg m-2 align-items-center <?= ($animal['sexe']) ? "perso_bgBleu" : "perso_bgRose" ?>" style="height: 200px;">
                 <div class="col p-2 text-center">
-                    <img src="../public/sources/images/Animaux/<?= $animal['type_animal'] ?>/<?= $animal["image"]['url_image'] ?>" class="img-thumbnail" alt="<?= $animal["image"]['libelle_image'] ?>" style="max-height: 180px;">
+                    <img src="public/sources/images/Animaux/<?= $animal['type_animal'] ?>/<?= $animal["image"]['url_image'] ?>" class="img-thumbnail" alt="<?= $animal["image"]['libelle_image'] ?>" style="max-height: 180px;">
                 </div>
                 <div class="col-2 border-left border-right border-dark text-center">
                 <?php 
@@ -31,9 +31,9 @@ require_once("../controllers/pensionnaire.php");
                 else if ($animal['ami_enfant'] === "N/A") $iconeEnfant = "babyQuest";                
                 ?>
 
-                <img src="../public/sources/images/Autres/icones/<?=$iconeChien ?>.png" class="img-fluid" alt="chien ok" style="width: 50px;">
-                <img src="../public/sources/images/Autres/icones/<?=$iconeChat ?>.png" class="img-fluid" alt="chat ok" style="width: 50px;">
-                <img src="../public/sources/images/Autres/icones/<?=$iconeEnfant ?>.png" class="img-fluid" alt="bébé ok" style="width: 50px;">
+                <img src="public/sources/images/Autres/icones/<?=$iconeChien ?>.png" class="img-fluid" alt="chien ok" style="width: 50px;">
+                <img src="public/sources/images/Autres/icones/<?=$iconeChat ?>.png" class="img-fluid" alt="chat ok" style="width: 50px;">
+                <img src="public/sources/images/Autres/icones/<?=$iconeEnfant ?>.png" class="img-fluid" alt="bébé ok" style="width: 50px;">
 
                 </div>
                 <div class="col-6 text-center">

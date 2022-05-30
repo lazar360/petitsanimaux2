@@ -1,5 +1,5 @@
 <?php 
-require_once"../config/config.php";
+require_once"config/config.php";
 ?>
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark perso_size20">
