@@ -1,8 +1,8 @@
-<?php include("header.php"); 
-//require_once("../controllers/pensionnaire.php");
-?>
+<?php 
+ob_start();
 
-<?= styleTitreNiveau1($titreH1, COLOR_PENSIONNAIRE) ?>
+echo(styleTitreNiveau1($titreH1, COLOR_PENSIONNAIRE)); 
+?>
 
 <div class="row no-gutters">
     <?php foreach ($animaux as $animal) : ?>
@@ -51,4 +51,8 @@
         </div>
     <?php endforeach; ?>
 </div>
-<?php include"footer.php" ?>
+
+<?php 
+$content = ob_get_clean();
+require_once "template.php";
+?>

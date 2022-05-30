@@ -1,9 +1,12 @@
 <?php
 
 function getPensionnaire(){
+    require_once "public/utile/formatage.php"; 
+    require_once "models/animal.dao.php";
+    require_once "config/config.php";
 
-    require_once("models/animal.dao.php");
-    require_once("config/config.php");
+    $title = "Page des pensionnaires";
+    $description = "C'est la page des pensionnaires";
 
     $_GET['id_statut'] = 1; //à supprimer
     $animaux = getAnimalFromStatus($_GET['id_statut']);
@@ -20,3 +23,4 @@ function getPensionnaire(){
     }
     require_once "views/pensionnaire.view.php";
 }
+
