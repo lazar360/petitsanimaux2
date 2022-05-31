@@ -19,7 +19,7 @@
         <header class="bg-dark text-white rounded-top perso_policeTitre">
             <div class="row align-items-center m-0">
                 <div class="col-2 p-2 text-center">
-                    <a href="../Global/index.php" class="text-white">
+                    <a href="../index.php" class="text-white">
                         <img src="public/sources/images/Autres/logoNANA2.jpg" alt="logo" class="rounded-circle img-fluid perso_logoSize" />
                     </a>
                 </div>

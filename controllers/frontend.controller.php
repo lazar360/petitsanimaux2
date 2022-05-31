@@ -1,9 +1,10 @@
 <?php
+require_once "public/utile/formatage.php";
+require_once "models/animal.dao.php";
+require_once "config/config.php";
 
 function getPensionnaire(){
-    require_once "public/utile/formatage.php"; 
-    require_once "models/animal.dao.php";
-    require_once "config/config.php";
+    
 
     $title = "Page des pensionnaires";
     $description = "C'est la page des pensionnaires";
@@ -21,6 +22,14 @@ function getPensionnaire(){
         $animaux[$key]['image'] = $image;
         $animaux[$key]['caracteres'] = getCaracteresFromAnimal($animal['id_animal']);
     }
-    require_once "views/pensionnaire.view.php";
+    require_once "views/front/pensionnaire.view.php";
+}
+
+function getAccueil(){
+
+    $title = "Page d'accueil";
+    $description = "C'est la page d'accueil";
+
+    require_once "views/front/accueil.view.php";
 }
 
