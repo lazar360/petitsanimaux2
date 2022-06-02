@@ -2,4 +2,13 @@
 
 require_once "controllers/frontend.controller.php";
 
-getAccueil();
+   if ($_GET['page'] !== []) {
+       if ($_GET['page'] === 'accueil') getAccueil();
+       if ($_GET['page'] === 'pensionnaire') getPensionnaire();
+   }else{
+      getAccueil();
+ }
+
+
+
+

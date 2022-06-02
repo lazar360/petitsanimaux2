@@ -23,9 +23,9 @@ require_once"config/config.php";
           Pensionnaires
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item perso_ColorOrangeMenu" href="../Global/pensionnaire.php?id_statut=<?=ID_STATUT_A_L_ADOPTION ?>">Ils cherchent une famille</a>
-          <a class="dropdown-item perso_ColorOrangeMenu" href="../Global/pensionnaire.php?id_statut=<?=ID_STATUT_FALD ?>">Famille d'accueil longue durée</a>
-          <a class="dropdown-item perso_ColorOrangeMenu" href="../Global/pensionnaire.php?id_statut=<?=ID_STATUT_ADOPTE ?>">Les anciens</a>
+          <a class="dropdown-item perso_ColorOrangeMenu" href="?page=pensionnaire&idstatut=<?=ID_STATUT_A_L_ADOPTION ?>">Ils cherchent une famille</a>
+          <a class="dropdown-item perso_ColorOrangeMenu" href="?page=pensionnaire&idstatut=<?=ID_STATUT_FALD ?>">Famille d'accueil longue durée</a>
+          <a class="dropdown-item perso_ColorOrangeMenu" href="?page=pensionnaire&idstatut=<?=ID_STATUT_ADOPTE ?>">Les anciens</a>
       </li>
 
       <li class="nav-item dropdown">
@@ -67,7 +67,7 @@ require_once"config/config.php";
         </a>
         <a class="dropdown-item" style="color: grey ;" href="../Global/test.php">Test</a>
       </li>
-
+    
     </ul>
   </div>
 </nav>
