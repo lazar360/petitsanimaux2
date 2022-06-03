@@ -1,10 +1,12 @@
-<?php include("../Commons/header.php"); 
+<?php 
+ob_start();
+
 echo(styleTitreNiveau1("Association Nos Amis - Nos Animaux (N.A.N.A) <br> Clermont (Arriège 09)", COLOR_ASSO));
 ?>
 
 <div class="row align-items-center mt-5">
     <div class="col-12 col-lg-3 text-center">
-        <img class="img-fluid" src="../../sources/images/Autres/logoNANA2.jpg" alt="logo" />
+        <img class="img-fluid" src="public/sources/images/Autres/logoNANA2.jpg" alt="logo" />
     </div>
 
     <div class="col-12 col-lg-9">
@@ -32,7 +34,7 @@ echo(styleTitreNiveau1("Association Nos Amis - Nos Animaux (N.A.N.A) <br> Clermo
 
 <div class="row align-items-center">
     <div class="col-12 col-lg-3 text-center">
-        <img class="img-fluid" style="height: 250px;" src="../../sources/images/Animaux/Chats/Odin/Odin.jpg" alt="Image mascote" />
+        <img class="img-fluid" style="height: 250px;" src="public/sources/images/Animaux/chat/Odin/Odin.jpg" alt="Image mascote" />
     </div>
 
     <div class="col-12 col-lg-9">
@@ -45,4 +47,8 @@ echo(styleTitreNiveau1("Association Nos Amis - Nos Animaux (N.A.N.A) <br> Clermo
     </div>
 
 </div>
-<?php include("../Commons/footer.php") ?>
+
+<?php 
+$content = ob_get_clean();
+require "views/template.php" 
+?>

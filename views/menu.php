@@ -14,8 +14,8 @@ require_once"config/config.php";
           L'asso
         </a>
         <div class="dropdown-menu " aria-labelledby="navbarDropdown">
-          <a class="dropdown-item perso_ColorRoseMenu" href="../Global/association.php">Qui sommes-nous ?</a>
-          <a class="dropdown-item perso_ColorRoseMenu" href="../Global/partenaires.php">Partenaires</a>
+          <a class="dropdown-item perso_ColorRoseMenu" href="?page=association">Qui sommes-nous ?</a>
+          <a class="dropdown-item perso_ColorRoseMenu" href="?page=partenaires">Partenaires</a>
       </li>
 
       <li class="nav-item dropdown">

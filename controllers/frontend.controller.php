@@ -39,3 +39,18 @@ function getAccueil(){
     require_once "views/front/accueil.view.php";
 }
 
+function getAssociation(){
+
+    $title = "L'association";
+    $description = "C'est la page d'association";
+
+    require_once "views/front/association/association.view.php";
+}
+
+function getPartenaires(){
+
+    $title = "Les partenaires";
+    $description = "C'est la page des partenaires";
+
+    require_once "views/front/association/partenaires.view.php";
+}
