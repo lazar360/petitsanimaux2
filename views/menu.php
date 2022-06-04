@@ -43,11 +43,11 @@ require_once"config/config.php";
           Conseils
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item perso_ColorRougeMenu" href="../Articles/temperatures.php">Températures</a>
-          <a class="dropdown-item perso_ColorRougeMenu" href="../Articles/chocolat.php">Le Chocolat</a>
-          <a class="dropdown-item perso_ColorRougeMenu" href="../Articles/plantes.php">Les plantes toxiques</a>
-          <a class="dropdown-item perso_ColorRougeMenu" href="../Articles/sterilisation.php">Stérilisation</a>
-          <a class="dropdown-item perso_ColorRougeMenu" href="../Articles/educateur.php">Educateur canin</a>
+          <a class="dropdown-item perso_ColorRougeMenu" href="?page=temperatures">Températures</a>
+          <a class="dropdown-item perso_ColorRougeMenu" href="?page=chocolat">Le Chocolat</a>
+          <a class="dropdown-item perso_ColorRougeMenu" href="?page=plantes">Les plantes toxiques</a>
+          <a class="dropdown-item perso_ColorRougeMenu" href="?page=sterilisation">Stérilisation</a>
+          <a class="dropdown-item perso_ColorRougeMenu" href="?page=educateur">Educateur canin</a>
 
       </li>
 
@@ -56,17 +56,11 @@ require_once"config/config.php";
           Contacts
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item perso_ColorBleuMenu" href="../Contact/contact.php">Contact</a>
-          <a class="dropdown-item perso_ColorBleuMenu" href="../Contact/don.php">Dons</a>
-          <a class="dropdown-item perso_ColorBleuMenu" href="../Contact/mentions.php">Mentions Légales</a>
+          <a class="dropdown-item perso_ColorBleuMenu" href="?page=contact">Contact</a>
+          <a class="dropdown-item perso_ColorBleuMenu" href="?page=don">Dons</a>
+          <a class="dropdown-item perso_ColorBleuMenu" href="?page=mentions">Mentions Légales</a>
       </li>
 
-      <li class="nav-item dropdown">
-      <a class="nav-link dropdown-toggle perso_ColorBleuMenu" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
-          Test
-        </a>
-        <a class="dropdown-item" style="color: grey ;" href="../Global/test.php">Test</a>
-      </li>
     
     </ul>
   </div>

@@ -1,16 +1,22 @@
-<?php include("../Commons/header.php"); ?>
+<?php 
+ob_start();
 
-<?= (styleTitreNiveau1("Educateur", COLOR_CONSEILS)) ?>
+echo(styleTitreNiveau1("Chocolat", COLOR_CONSEILS))
+ 
+?>
 
 <div class="row no-gutters">
     <div class="card col-auto mx-auto mt-2" style="width: 40rem;">
-        <img src="../../sources/images/Autres/Articles/imageEduc.jpg" class="card-img-top p-1" alt="Educateur">
+        <img src="public/sources/images/Autres/Articles/Chocolat.jpg" class="card-img-top p-1" alt="Chocolat">
         <div class="card-body text-center">
-            <?= (styleTitreNiveau2("Educateur", COLOR_CONSEILS)) ?>
+            <?= (styleTitreNiveau2("Chocolat", COLOR_CONSEILS)) ?>
             <p class="card-text">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Id itaque cumque possimus temporibus! </p>
             <a href="#" class="btn btn-primary">En savoir plus</a>
         </div>
     </div>
 </div>
 
-<?php include("../Commons/footer.php") ?>
+<?php 
+$content = ob_get_clean();
+require "views/template.php" 
+?>

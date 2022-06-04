@@ -4,6 +4,14 @@ require_once "models/animal.dao.php";
 require_once "config/config.php";
 require_once "controllers/frontend.controller.php";
 
+function getAccueil(){
+
+    $title = "Page d'accueil";
+    $description = "C'est la page d'accueil";
+
+    require_once "views/front/accueil.view.php";
+}
+
 function getPensionnaire(){
     
     $title = "Page des pensionnaires";
@@ -31,12 +39,12 @@ function getPensionnaire(){
     require_once "views/front/pensionnaire.view.php";
 }
 
-function getAccueil(){
+function getPartenaires(){
 
-    $title = "Page d'accueil";
-    $description = "C'est la page d'accueil";
+    $title = "Les partenaires";
+    $description = "C'est la page des partenaires";
 
-    require_once "views/front/accueil.view.php";
+    require_once "views/front/association/partenaires.view.php";
 }
 
 function getAssociation(){
@@ -47,10 +55,66 @@ function getAssociation(){
     require_once "views/front/association/association.view.php";
 }
 
-function getPartenaires(){
+function getTemperatures(){
+
+    $title = "Article Températures";
+    $description = "C'est la page traitant des risques liés aux températures";
+
+    require_once "views/front/articles/temperatures.view.php";
+}
+
+function getPlantes(){
+
+    $title = "Article plantes";
+    $description = "C'est la page traitant des risques liés aux plantes";
+
+    require_once "views/front/articles/plantes.view.php";
+}
+
+function getSterilisation(){
+
+    $title = "Article stérilisation";
+    $description = "C'est la page sensibilisant sur le sujet de la stérilisation";
+
+    require_once "views/front/articles/sterilisation.view.php";
+}
+
+function getEducateur(){
+
+    $title = "Article éducateur";
+    $description = "C'est la page sensibilisant sur le sujet de l'éucation";
+
+    require_once "views/front/articles/educateur.view.php";
+}
+
+function getChocolat(){
+
+    $title = "Article chocolat";
+    $description = "C'est la page traitant des risques liés au chocolat";
+
+    require_once "views/front/articles/chocolat.view.php";
+}
+
+function getContact(){
 
     $title = "Les partenaires";
-    $description = "C'est la page des partenaires";
+    $description = "C'est la page des contacts";
 
-    require_once "views/front/association/partenaires.view.php";
+    require_once "views/front/contact/contact.view.php";
+}
+
+function getDon(){
+
+    $title = "Les dons";
+    $description = "C'est la page des dons";
+
+    require_once "views/front/contact/don.view.php";
+}
+
+function getMentions(){
+
+    $title = "Les mentions";
+    $description = "C'est la page des mentions légales";
+
+    require_once "views/front/contact/mentions.view.php";
 }
