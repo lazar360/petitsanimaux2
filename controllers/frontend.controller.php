@@ -129,8 +129,12 @@ function getNouvelles(){
 
 function getAnimal(){
 
-    $title = "Animal";
-    $description = "C'est la page de préseentation du petit animal";
+    $animal = getAnimalFromIdAnimalBD($_GET['idAnimal']);
+    $title = "La page de ". $animal['nom_animal'];
+    $description = "La page de ". $animal['nom_animal'];
+    $images = getImagesFromAnimal($_GET['idAnimal']);
+    $caracteres = getCaracteresFromAnimal($_GET['idAnimal']);
+    $image = getFirstImageAnimal($_GET['idAnimal']);
 
     require_once "views/front/animal.view.php";
 }
