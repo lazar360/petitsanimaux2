@@ -122,7 +122,15 @@ function getMentions(){
 function getNouvelles(){
 
     $title = "Les nouvelles";
-    $description = "C'est la page des des nouvelles des adoptés";
+    $description = "C'est la page des nouvelles des adoptés";
 
     require_once "views/front/actus/nouvelles.view.php";
+}
+
+function getAnimal(){
+
+    $title = "Animal";
+    $description = "C'est la page de préseentation du petit animal";
+
+    require_once "views/front/animal.view.php";
 }

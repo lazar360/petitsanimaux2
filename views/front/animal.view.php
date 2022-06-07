@@ -1,6 +1,5 @@
-<?php
-require_once("../Global/pdo.php");
-include("../Commons/header.php");
+<?php 
+ob_start();
 
 $bdd = connexionPDO();
 $req = '
@@ -34,7 +33,7 @@ $stmt->closeCursor();
 
 <div class="row border-dark rounded-lg m-2 align-items-center <?= ($animal['sexe']) ? ' perso_bgBleu' : ' perso_bgRose'  ?>">
     <div class="col p-2 text-center">
-        <img src="../../sources/images/Animaux/<?= $animal['type_animal'] ?>/<?= $images[0]['url_image'] ?>" class="img-thumbnail" alt="<?= $images[0]['description_image'] ?>" style="max-height: 180px;">
+        <img src="public/sources/images/Animaux/<?= $animal['type_animal'] ?>/<?= $images[0]['url_image'] ?>" class="img-thumbnail" alt="<?= $images[0]['description_image'] ?>" style="max-height: 180px;">
     </div>
     <div class="col-2 col-md-1 border-left border-right border-dark text-center">
         <?php
@@ -55,9 +54,9 @@ $stmt->closeCursor();
         else if ($animal['ami_enfant'] === "N/A") $iconeEnfant = "babyQuest";
         ?>
 
-        <img src="../../sources/images/Autres/icones/<?= $iconeChien ?>.png" class="img-fluid" alt="chien ok" style="width: 50px;">
-        <img src="../../sources/images/Autres/icones/<?= $iconeChat ?>.png" class="img-fluid" alt="chat ok" style="width: 50px;">
-        <img src="../../sources/images/Autres/icones/<?= $iconeEnfant ?>.png" class="img-fluid" alt="bébé ok" style="width: 50px;">
+        <img src="public/sources/images/Autres/icones/<?= $iconeChien ?>.png" class="img-fluid" alt="chien ok" style="width: 50px;">
+        <img src="public/sources/images/Autres/icones/<?= $iconeChat ?>.png" class="img-fluid" alt="chat ok" style="width: 50px;">
+        <img src="public/sources/images/Autres/icones/<?= $iconeEnfant ?>.png" class="img-fluid" alt="bébé ok" style="width: 50px;">
 
     </div>
     <div class="col-6 col-md-4 text-center">
@@ -104,7 +103,7 @@ $stmt->closeCursor();
             <div class="carousel-inner text-center">
                 <?php foreach ($images as $key => $image) : ?>
                     <div class="carousel-item <?php echo ($key === 0) ? "active" : "" ?>">
-                        <img src="../../sources/images/Animaux/<?= $animal['type_animal'] ?>/<?= $image['url_image'] ?>" class="img-thumbail" style="height: 500px;" alt="<?= $image['description_image'] ?>">
+                        <img src="public/sources/images/Animaux/<?= $animal['type_animal'] ?>/<?= $image['url_image'] ?>" class="img-thumbail" style="height: 500px;" alt="<?= $image['description_image'] ?>">
                     </div>
                 <?php endforeach;  ?>
             </div>
@@ -126,21 +125,24 @@ $stmt->closeCursor();
         </div>
         <hr>
         <div>
-            <img src="../../sources/images/Autres/icones/IconeAdopt.png" alt="icone adoption" width="50" height="50" class="d-block">
+            <img src="public/sources/images/Autres/icones/IconeAdopt.png" alt="icone adoption" width="50" height="50" class="d-block">
             <?= $animal['adoption_description_animal'] ?>
         </div>
         <hr>
         <div>
-            <img src="../../sources/images/Autres/icones/iconeContrat.png" alt="icone adoption" width="50" height="50" class="d-block">
+            <img src="public/sources/images/Autres/icones/iconeContrat.png" alt="icone adoption" width="50" height="50" class="d-block">
             <?= $animal['engagemet_description_animal'] ?>
         </div>
         <hr>
         <div>
-            <img src="../../sources/images/Autres/icones/oeil.jpg" alt="icone adoption" width="50" height="50" class="d-block">
+            <img src="public/sources/images/Autres/icones/oeil.jpg" alt="icone adoption" width="50" height="50" class="d-block">
             <?= $animal['localisation_description_animal'] ?>
         </div>
 
     </div>
 </div>
 
-<?php include("../Commons/footer.php") ?>
+<?php 
+$content = ob_get_clean();
+require_once "views/template.php";
+?>

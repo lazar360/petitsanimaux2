@@ -16,7 +16,7 @@ require_once "controllers/frontend.controller.php";
        if ($_GET['page'] === 'don') getDon();
        if ($_GET['page'] === 'mentions') getMentions();
        if ($_GET['page'] === 'nouvelles') getNouvelles();
-
+       if ($_GET['page'] === 'animal') getAnimal();
    }else{
       getAccueil();
  }

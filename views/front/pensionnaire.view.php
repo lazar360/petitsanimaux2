@@ -45,7 +45,9 @@ echo(styleTitreNiveau1($titreH1, COLOR_PENSIONNAIRE));
                             <?= ($animal['sexe']) ? $caractere['libelle_caractere_m'] : $caractere['libelle_caractere_f']   ?></span>
                         <?php endforeach; ?>
                     </div>
-                    <a href="animal.php?idAnimal=<?=$animal['id_animal']?>" class="btn btn-primary">Visiter ma page</a>
+                    
+                    <a href="?page=animal&idAnimal=<?=$animal['id_animal']?>" class="btn btn-primary">Visiter ma page</a>
+                    
                 </div>
             </div>
         </div>
