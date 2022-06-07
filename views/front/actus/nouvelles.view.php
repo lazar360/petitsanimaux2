@@ -1,13 +1,16 @@
-<?php include("../Commons/header.php"); ?>
+<?php 
+ob_start();
 
-<?= (styleTitreNiveau1("Actus", COLOR_ACTUS)) ?>
+echo(styleTitreNiveau1("Nouvelles", COLOR_ACTUS))
+?>
+
 <div class="row border-bottom">
     <?= styleTitrePost("Posté le : <span class'".COLOR_ACTUS."'>05/2018 </span> par <span class = perso_ColorVertMenu> Framboise</span>") ?>
 </div>
 
 <div class="row no-gutters mt-3 align-items-center" style="min-height: 300px;">
     <div class="p-12 col-md-3 text-center">
-        <img src="../../sources/images/Animaux/Chats/Framboise/Framboise.jpg" alt="framboise" style="max-height: 280px;">
+        <img src="public/sources/images/Animaux/chat/Framboise/Framboise.jpg" alt="framboise" style="max-height: 280px;">
     </div>
     <div class="p-12 col-md-9">
         <p>
@@ -35,4 +38,7 @@
 
 
 
-<?php include("../Commons/footer.php") ?>
+<?php 
+$content = ob_get_clean();
+require "views/template.php" 
+?>

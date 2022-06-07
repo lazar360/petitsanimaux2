@@ -118,3 +118,11 @@ function getMentions(){
 
     require_once "views/front/contact/mentions.view.php";
 }
+
+function getNouvelles(){
+
+    $title = "Les nouvelles";
+    $description = "C'est la page des des nouvelles des adoptés";
+
+    require_once "views/front/actus/nouvelles.view.php";
+}
