@@ -97,7 +97,7 @@ function getChocolat(){
 
 function getContact(){
 
-    $title = "Les partenaires";
+    $title = "Contact";
     $description = "C'est la page des contacts";
 
     require_once "views/front/contact/contact.view.php";

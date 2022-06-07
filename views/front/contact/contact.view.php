@@ -1,8 +1,11 @@
-<?php include("../Commons/header.php"); ?>
+<?php 
+ob_start();
 
-<?= styleTitreNiveau3("Suivez-nous :", COLOR_CONTACT);?>
+echo(styleTitreNiveau1("Suivez-nous :", COLOR_CONTACT)) 
+?>
+
 <p class="pl-5">
-    <a href="https://www.facebook.com/nosamisnosanimaux/" target=_blank><img src="../../sources/images/Autres/icones/facebook.png" width="30px" alt="Facebook"/></a>
+    <a href="https://www.facebook.com/nosamisnosanimaux/" target=_blank><img src="public/sources/images/Autres/icones/facebook.png" width="30px" alt="Facebook"/></a>
     Suivez-nous sur facebook et participez à l'aventure de Nos Amis Nos Animaux : 
     <a href="https://www.facebook.com/nosamisnosanimaux/" target=_blank><span class="badge badge-pill badge-primary">Notre facebook</span></a>
 </p>
@@ -10,15 +13,15 @@
 <?= styleTitreNiveau3("Contactez-nous :", COLOR_CONTACT) ?>
 <div class="pl-5">
     <p>
-        <img src="../../sources/images/Autres/icones/courrier.png" width="30px" alt="courrier"/>
+        <img src="public/sources/images/Autres/icones/courrier.png" width="30px" alt="courrier"/>
         Par courrier : Hameau de la Souleille - 09420 Clermont, Midi-Pyrenees, France
     </p>
     <p>
-        <img src="../../sources/images/Autres/icones/mail.png" width="30px" alt="mail"/>
+        <img src="public/sources/images/Autres/icones/mail.png" width="30px" alt="mail"/>
         Par mail : <a href="mailto:associationnosamisnosanimaux@gmail.com">associationnosamisnosanimaux@gmail.com</a>
     </p>
     <p>
-        <img src="../../sources/images/Autres/icones/tel.png" width="30px" alt="tel"/>
+        <img src="public/sources/images/Autres/icones/tel.png" width="30px" alt="tel"/>
         Par téléphone : 06 10 59 94 71
     </p>
     <p>
@@ -84,4 +87,7 @@ if(isset($_POST["nom"]) && !empty($_POST["nom"])
 
 ?>
 
-<?php include("../Commons/footer.php") ?>
+<?php 
+$content = ob_get_clean();
+require "views/template.php" 
+?>

@@ -1,6 +1,8 @@
-<?php include("../Commons/header.php"); ?>
+<?php 
+ob_start();
 
-<?= (styleTitreNiveau1("Dons", COLOR_CONTACT)) ?>
+echo(styleTitreNiveau1("Dons", COLOR_CONTACT))
+?>
 
 <div style="padding-left: 50px;">
 <?= (styleTitreNiveau3("Pourquoi faire un don ?", COLOR_CONTACT)) ?>
@@ -23,4 +25,7 @@
     </div>
 </div>
 
-<?php include("../Commons/footer.php") ?>
+<?php 
+$content = ob_get_clean();
+require "views/template.php" 
+?>

@@ -1,6 +1,8 @@
-<?php include("../Commons/header.php"); ?>
+<?php 
+ob_start();
 
-<?= (styleTitreNiveau1("Mentions légales", COLOR_CONTACT)) ?>
+echo(styleTitreNiveau1("Mentions légales", COLOR_CONTACT))
+?>
 
 <div style="padding-left: 50px;">
     <h1>A propos</h1>
@@ -23,4 +25,7 @@
     </div>
 </div>
 
-<?php include("../Commons/footer.php") ?>
+<?php 
+$content = ob_get_clean();
+require "views/template.php" 
+?>
