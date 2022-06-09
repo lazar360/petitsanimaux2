@@ -50,5 +50,5 @@ echo(styleTitreNiveau1("Association Nos Amis - Nos Animaux (N.A.N.A) <br> Clermo
 
 <?php 
 $content = ob_get_clean();
-require "views/template.php" 
+require "views/commons/template.php" 
 ?>

@@ -4,7 +4,7 @@ require_once "models/animal.dao.php";
 require_once "config/config.php";
 require_once "controllers/frontend.controller.php";
 
-function getAccueil(){
+function getPageAccueil(){
 
     $title = "Page d'accueil";
     $description = "C'est la page d'accueil";
@@ -12,7 +12,7 @@ function getAccueil(){
     require_once "views/front/accueil.view.php";
 }
 
-function getPensionnaire(){
+function getPagePensionnaire(){
     
     $title = "Page des pensionnaires";
     $description = "C'est la page des pensionnaires";
@@ -39,7 +39,7 @@ function getPensionnaire(){
     require_once "views/front/pensionnaire.view.php";
 }
 
-function getPartenaires(){
+function getPagePartenaires(){
 
     $title = "Les partenaires";
     $description = "C'est la page des partenaires";
@@ -47,7 +47,7 @@ function getPartenaires(){
     require_once "views/front/association/partenaires.view.php";
 }
 
-function getAssociation(){
+function getPageAssociation(){
 
     $title = "L'association";
     $description = "C'est la page d'association";
@@ -55,7 +55,7 @@ function getAssociation(){
     require_once "views/front/association/association.view.php";
 }
 
-function getTemperatures(){
+function getPageTemperatures(){
 
     $title = "Article Températures";
     $description = "C'est la page traitant des risques liés aux températures";
@@ -63,7 +63,7 @@ function getTemperatures(){
     require_once "views/front/articles/temperatures.view.php";
 }
 
-function getPlantes(){
+function getPagePlantes(){
 
     $title = "Article plantes";
     $description = "C'est la page traitant des risques liés aux plantes";
@@ -71,7 +71,7 @@ function getPlantes(){
     require_once "views/front/articles/plantes.view.php";
 }
 
-function getSterilisation(){
+function getPageSterilisation(){
 
     $title = "Article stérilisation";
     $description = "C'est la page sensibilisant sur le sujet de la stérilisation";
@@ -79,7 +79,7 @@ function getSterilisation(){
     require_once "views/front/articles/sterilisation.view.php";
 }
 
-function getEducateur(){
+function getPageEducateur(){
 
     $title = "Article éducateur";
     $description = "C'est la page sensibilisant sur le sujet de l'éucation";
@@ -87,7 +87,7 @@ function getEducateur(){
     require_once "views/front/articles/educateur.view.php";
 }
 
-function getChocolat(){
+function getPageChocolat(){
 
     $title = "Article chocolat";
     $description = "C'est la page traitant des risques liés au chocolat";
@@ -95,7 +95,7 @@ function getChocolat(){
     require_once "views/front/articles/chocolat.view.php";
 }
 
-function getContact(){
+function getPageContact(){
 
     $title = "Contact";
     $description = "C'est la page des contacts";
@@ -103,7 +103,7 @@ function getContact(){
     require_once "views/front/contact/contact.view.php";
 }
 
-function getDon(){
+function getPageDon(){
 
     $title = "Les dons";
     $description = "C'est la page des dons";
@@ -111,7 +111,7 @@ function getDon(){
     require_once "views/front/contact/don.view.php";
 }
 
-function getMentions(){
+function getPageMentions(){
 
     $title = "Les mentions";
     $description = "C'est la page des mentions légales";
@@ -119,7 +119,7 @@ function getMentions(){
     require_once "views/front/contact/mentions.view.php";
 }
 
-function getNouvelles(){
+function getPageNouvelles(){
 
     $title = "Les nouvelles";
     $description = "C'est la page des nouvelles des adoptés";
@@ -127,7 +127,7 @@ function getNouvelles(){
     require_once "views/front/actus/nouvelles.view.php";
 }
 
-function getAnimal(){
+function getPageAnimal(){
 
     $animal = getAnimalFromIdAnimalBD($_GET['idAnimal']);
     $title = "La page de ". $animal['nom_animal'];

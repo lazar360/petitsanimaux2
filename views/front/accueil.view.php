@@ -108,5 +108,5 @@ echo (styleTitreNiveau1("Ils ont besoin de vous !", COLOR_ASSO));
 
 <?php 
 $content = ob_get_clean();
-require "views/template.php" 
+require "views/commons/template.php" 
 ?>

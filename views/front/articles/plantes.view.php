@@ -19,5 +19,5 @@ echo(styleTitreNiveau1("Plantes", COLOR_CONSEILS))
 
 <?php 
 $content = ob_get_clean();
-require "views/template.php" 
+require "views/commons/template.php" 
 ?>

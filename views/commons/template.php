@@ -24,7 +24,7 @@
                     </a>
                 </div>
                 <div class="col-6 col-lg-8 m-0 p-0">
-                    <?php include 'menu.php'; ?>
+                    <?php include 'views/commons/menu.php'; ?>
                 </div>
 
                 <div class="col-4 col-lg-2 text-right pt-1 pr-4 ">

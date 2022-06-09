@@ -18,5 +18,5 @@ echo(styleTitreNiveau1("Températures", COLOR_CONSEILS))
 
 <?php 
 $content = ob_get_clean();
-require "views/template.php" 
+require "views/commons/template.php" 
 ?>
