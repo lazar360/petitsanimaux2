@@ -1,26 +1,69 @@
 <?php
 
 require_once "controllers/frontend.controller.php";
+try{
 
-   if (isset($_GET['page']) && !empty($_GET['page'])) {
-       if ($_GET['page'] === 'accueil') getPageAccueil();
-       if ($_GET['page'] === 'pensionnaire') getPagePensionnaire();
-       if ($_GET['page'] === 'partenaires') getPagePartenaires();
-       if ($_GET['page'] === 'association') getPageAssociation();
-       if ($_GET['page'] === 'temperatures') getPageTemperatures();
-       if ($_GET['page'] === 'plantes') getPagePlantes();
-       if ($_GET['page'] === 'sterilisation') getPageSterilisation();
-       if ($_GET['page'] === 'educateur') getPageEducateur();
-       if ($_GET['page'] === 'chocolat') getPageChocolat();
-       if ($_GET['page'] === 'contact') getPageContact();
-       if ($_GET['page'] === 'don') getPageDon();
-       if ($_GET['page'] === 'mentions') getPageMentions();
-       if ($_GET['page'] === 'nouvelles') getPageNouvelles();
-       if ($_GET['page'] === 'animal') getPageAnimal();
-   }else{
-      getPageAccueil();
- }
+    if (isset($_GET['page']) && !empty($_GET['page'])) {
+        switch ($_GET['page']) {
+            case 'accueil': 
+                getPageAccueil();
+                break;
+            case 'pensionnaire':
+                getPagePensionnaire();
+                break;
+            case 'partenaires':
+                getPagePartenaires();        
+                break;
+            case 'association':
+                getPageAssociation();        
+                break;   
+            case 'temperatures':
+                getPageTemperatures();        
+                break;   
+            case 'plantes':
+                getPagePlantes();        
+                break;   
+            case 'sterilisation':
+                getPageSterilisation();        
+                break; 
+            case 'educateur':
+                getPageEducateur();        
+                break;      
+            case 'chocolat':
+                getPageChocolat();        
+                break;      
+            case 'contact':
+                getPageContact();        
+                break;      
+            case 'don':
+                getPageDon();        
+                break;      
+            case 'mentions':
+                getPageMentions();        
+                break;      
+            case 'nouvelles':
+                getPageNouvelles();        
+                break;
+            case 'animal':
+                getPageAnimal();        
+                break; 
+            default:
+                throw new Exception("Page introuvable");
+                break;
+            }          
+        }else{
+            getPageAccueil();
+       }
+} catch (Exception $e) {
+    $title = "Erreur";
+    $description = "C'est la page de gestion des erreur";
+    $errorMessage = $e->getMessage();
+    require "views/commons/erreur.view.php";
+}
 
+
+
+    
 
 
 
