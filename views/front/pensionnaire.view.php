@@ -46,7 +46,7 @@ echo(styleTitreNiveau1($titreH1, COLOR_PENSIONNAIRE));
                         <?php endforeach; ?>
                     </div>
                     
-                    <a href="?page=animal&idAnimal=<?=$animal['id_animal']?>" class="btn btn-primary">Visiter ma page</a>
+                    <a href="animal&idAnimal=<?=$animal['id_animal']?>" class="btn btn-primary">Visiter ma page</a>
                     
                 </div>
             </div>
