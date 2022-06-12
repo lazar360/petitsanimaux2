@@ -5,4 +5,5 @@ RewriteCond %{REQUEST_FILENAME} !-d
 
 RewriteRule ^(.*)$ index.php?page=$1
 
+ErrorDocument 403 /petitsanimaux2/index.php?page=error403
 ErrorDocument 404 /petitsanimaux2/index.php?page=error404

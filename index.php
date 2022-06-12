@@ -50,6 +50,9 @@ try{
             case 'error404':
                 throw new Exception("Page introuvable Error 404");    
                 break; 
+            case 'error403':
+                throw new Exception("Accès refusé Error 403");
+                break; 
             default:
                 throw new Exception("Page introuvable");
                 break;
