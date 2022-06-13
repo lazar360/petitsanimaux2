@@ -15,4 +15,6 @@ const ID_STATUT_A_L_ADOPTION = 1;
 const ID_STATUT_ADOPTE = 2;
 const ID_STATUT_FALD = 3;
 const ID_STATUT_MORT = 4;
+
+define("URL", str_replace("index.php", "", (isset($_SERVER['HTTPS']) ? "https" : "http"). "://$_SERVER[HTTP_HOST]$_SERVER[PHP_SELF]"));
 ?>
