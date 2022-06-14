@@ -1,10 +1,12 @@
 <?php
 require_once "public/utile/formatage.php";
 require_once "models/animal.dao.php";
+require_once "models/actualite.dao.php";
 require_once "config/config.php";
 require_once "controllers/frontend.controller.php";
 
-function getPageAccueil(){
+function getPageAccueil()
+{
 
     $title = "Page d'accueil";
     $description = "C'est la page d'accueil";
@@ -12,34 +14,39 @@ function getPageAccueil(){
     require_once "views/front/accueil.view.php";
 }
 
-function getPagePensionnaire(){
-    
+function getPagePensionnaire()
+{
+
     $title = "Page des pensionnaires";
     $description = "C'est la page des pensionnaires";
 
-    //$_GET['id_statut'] = 1; 
-    
-    $animaux = getAnimalFromStatus($_GET['idstatut']);
+    //Si la variable $_GET existe et est securisée
+    if (isset($_GET['idstatut']) && !empty($_GET['idstatut'])) {
+        $idstatut = Securite::secureHTML($_GET['idstatut']);
+        $animaux = getAnimalFromStatus($_GET['idstatut']);
+        $titreH1 = "";
+        if ((int)$_GET['idstatut'] === ID_STATUT_A_L_ADOPTION)
+            $titreH1 = "Ils cherchent une famille";
+        else if ((int)$_GET['idstatut'] === ID_STATUT_ADOPTE)
+            $titreH1 = "Les anciens";
+        else if ((int)$_GET['idstatut'] === ID_STATUT_FALD)
+            $titreH1 = "Famille d'accueil longue durée";
 
-    $titreH1 = "";
-    if ((int)$_GET['idstatut'] === ID_STATUT_A_L_ADOPTION)
-    $titreH1 = "Ils cherchent une famille";
-    else if ((int)$_GET['idstatut'] === ID_STATUT_ADOPTE)
-    $titreH1 = "Les anciens";
-    else if ((int)$_GET['idstatut'] === ID_STATUT_FALD)
-    $titreH1 = "Famille d'accueil longue durée";
+        foreach ($animaux as $key => $animal) {
+            $image = getFirstImageAnimal($animal['id_animal']);
+            $animaux[$key]['image'] = $image;
+            $caracteres = getCaracteresFromAnimal($animal['id_animal']);
+            $animaux[$key]['caracteres'] = $caracteres;
+        }
+        require_once "views/front/pensionnaire.view.php";
 
-    foreach($animaux as $key => $animal){
-        $image = getFirstImageAnimal($animal['id_animal']);
-        $animaux[$key]['image'] = $image;
-
-        $caracteres = getCaracteresFromAnimal($animal['id_animal']);
-        $animaux[$key]['caracteres'] = $caracteres;
+    } else {//Sinon
+        throw new Exception("L'id du statut n'est pas défini. Accès refusé");
     }
-    require_once "views/front/pensionnaire.view.php";
 }
 
-function getPagePartenaires(){
+function getPagePartenaires()
+{
 
     $title = "Les partenaires";
     $description = "C'est la page des partenaires";
@@ -47,7 +54,8 @@ function getPagePartenaires(){
     require_once "views/front/association/partenaires.view.php";
 }
 
-function getPageAssociation(){
+function getPageAssociation()
+{
 
     $title = "L'association";
     $description = "C'est la page d'association";
@@ -55,7 +63,8 @@ function getPageAssociation(){
     require_once "views/front/association/association.view.php";
 }
 
-function getPageTemperatures(){
+function getPageTemperatures()
+{
 
     $title = "Article Températures";
     $description = "C'est la page traitant des risques liés aux températures";
@@ -63,7 +72,8 @@ function getPageTemperatures(){
     require_once "views/front/articles/temperatures.view.php";
 }
 
-function getPagePlantes(){
+function getPagePlantes()
+{
 
     $title = "Article plantes";
     $description = "C'est la page traitant des risques liés aux plantes";
@@ -71,7 +81,8 @@ function getPagePlantes(){
     require_once "views/front/articles/plantes.view.php";
 }
 
-function getPageSterilisation(){
+function getPageSterilisation()
+{
 
     $title = "Article stérilisation";
     $description = "C'est la page sensibilisant sur le sujet de la stérilisation";
@@ -79,7 +90,8 @@ function getPageSterilisation(){
     require_once "views/front/articles/sterilisation.view.php";
 }
 
-function getPageEducateur(){
+function getPageEducateur()
+{
 
     $title = "Article éducateur";
     $description = "C'est la page sensibilisant sur le sujet de l'éucation";
@@ -87,7 +99,8 @@ function getPageEducateur(){
     require_once "views/front/articles/educateur.view.php";
 }
 
-function getPageChocolat(){
+function getPageChocolat()
+{
 
     $title = "Article chocolat";
     $description = "C'est la page traitant des risques liés au chocolat";
@@ -95,7 +108,8 @@ function getPageChocolat(){
     require_once "views/front/articles/chocolat.view.php";
 }
 
-function getPageContact(){
+function getPageContact()
+{
 
     $title = "Contact";
     $description = "C'est la page des contacts";
@@ -103,7 +117,8 @@ function getPageContact(){
     require_once "views/front/contact/contact.view.php";
 }
 
-function getPageDon(){
+function getPageDon()
+{
 
     $title = "Les dons";
     $description = "C'est la page des dons";
@@ -111,7 +126,8 @@ function getPageDon(){
     require_once "views/front/contact/don.view.php";
 }
 
-function getPageMentions(){
+function getPageMentions()
+{
 
     $title = "Les mentions";
     $description = "C'est la page des mentions légales";
@@ -119,22 +135,39 @@ function getPageMentions(){
     require_once "views/front/contact/mentions.view.php";
 }
 
-function getPageNouvelles(){
+function getPageActus()
+{
 
-    $title = "Les nouvelles";
-    $description = "C'est la page des nouvelles des adoptés";
+    $title = "Les Actus";
+    $description = "C'est la page des actus des adoptés";
 
+    $actualites = getActualitesFromBD();
+    
+    foreach($actualites as $key => $actualite){
+        $image = getImageActualiteFromBD($actualite['id_image']);
+        $actualites[$key]["image"] = $image;
+
+    }
+    
     require_once "views/front/actus/nouvelles.view.php";
 }
 
-function getPageAnimal(){
+function getPageAnimal()
+{
+    $idAnimal = $_GET['idAnimal'];
 
-    $animal = getAnimalFromIdAnimalBD($_GET['idAnimal']);
-    $title = "La page de ". $animal['nom_animal'];
-    $description = "La page de ". $animal['nom_animal'];
-    $images = getImagesFromAnimal($_GET['idAnimal']);
-    $caracteres = getCaracteresFromAnimal($_GET['idAnimal']);
-    $image = getFirstImageAnimal($_GET['idAnimal']);
+    if (isset($idAnimal) && !empty($idAnimal) && strval($idAnimal) === strval(intval($idAnimal))) {
+        $idAnimal = Securite::secureHTML($idAnimal);
+        $animal = getAnimalFromIdAnimalBD($idAnimal); 
+        $images = getImagesFromAnimal($idAnimal);
+        $caracteres = getCaracteresFromAnimal($idAnimal);
+        $image = getFirstImageAnimal($idAnimal);
+
+        $title = "La page de " . $animal['nom_animal'];
+        $description = "La page de " . $animal['nom_animal'];
 
     require_once "views/front/animal.view.php";
+    } else {
+        throw new Exception("L'id de l'animal n'est pas défini. Accès refusé");
+    }
 }
