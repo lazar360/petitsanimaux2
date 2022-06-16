@@ -7,7 +7,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
-    <link href="public/css/main.css" rel="stylesheet">
+    <link href="<?= URL ?>public/css/main.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Copse&family=Fredoka+One&display=swap" rel="stylesheet">
     <meta name="description" content="<?= $description ?>">
     <title><?= $title ?></title>
@@ -19,8 +19,8 @@
         <header class="bg-dark text-white rounded-top perso_policeTitre">
             <div class="row align-items-center m-0">
                 <div class="col-2 p-2 text-center">
-                    <a href="accueil" class="text-white">
-                        <img src="public/sources/images/Autres/logoNANA2.jpg" alt="logo" class="rounded-circle img-fluid perso_logoSize" />
+                    <a href="<?= URL ?>accueil" class="text-white">
+                        <img src="<?= URL ?>public/sources/images/Autres/logoNANA2.jpg" alt="logo" class="rounded-circle img-fluid perso_logoSize" />
                     </a>
                 </div>
                 <div class="col-6 col-lg-8 m-0 p-0">

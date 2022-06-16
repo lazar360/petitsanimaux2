@@ -14,8 +14,8 @@ require_once"config/config.php";
           L'asso
         </a>
         <div class="dropdown-menu " aria-labelledby="navbarDropdown">
-          <a class="dropdown-item perso_ColorRoseMenu" href="association">Qui sommes-nous ?</a>
-          <a class="dropdown-item perso_ColorRoseMenu" href="partenaires">Partenaires</a>
+          <a class="dropdown-item perso_ColorRoseMenu" href="<?= URL ?>association">Qui sommes-nous ?</a>
+          <a class="dropdown-item perso_ColorRoseMenu" href="<?= URL ?>partenaires">Partenaires</a>
       </li>
 
       <li class="nav-item dropdown">
@@ -23,9 +23,9 @@ require_once"config/config.php";
           Pensionnaires
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item perso_ColorOrangeMenu" href="pensionnaire&idstatut=<?=ID_STATUT_A_L_ADOPTION ?>">Ils cherchent une famille</a>
-          <a class="dropdown-item perso_ColorOrangeMenu" href="pensionnaire&idstatut=<?=ID_STATUT_FALD ?>">Famille d'accueil longue durée</a>
-          <a class="dropdown-item perso_ColorOrangeMenu" href="pensionnaire&idstatut=<?=ID_STATUT_ADOPTE ?>">Les anciens</a>
+          <a class="dropdown-item perso_ColorOrangeMenu" href="<?= URL ?>pensionnaire&idstatut=<?=ID_STATUT_A_L_ADOPTION ?>">Ils cherchent une famille</a>
+          <a class="dropdown-item perso_ColorOrangeMenu" href="<?= URL ?>pensionnaire&idstatut=<?=ID_STATUT_FALD ?>">Famille d'accueil longue durée</a>
+          <a class="dropdown-item perso_ColorOrangeMenu" href="<?= URL ?>pensionnaire&idstatut=<?=ID_STATUT_ADOPTE ?>">Les anciens</a>
       </li>
 
       <li class="nav-item dropdown">
@@ -33,7 +33,7 @@ require_once"config/config.php";
           Actus
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-        <a class="dropdown-item perso_ColorVertMenu" href="nouvelles">Nouvelles des adoptés</a>
+        <a class="dropdown-item perso_ColorVertMenu" href="<?= URL ?>nouvelles">Nouvelles des adoptés</a>
         <!--<a class="dropdown-item perso_ColorVertMenu" href="#">Evènements</a>
         <a class="dropdown-item perso_ColorVertMenu" href="../Global/actus.php">Nos actions au quotidien</a>-->
       </li>
@@ -43,11 +43,11 @@ require_once"config/config.php";
           Conseils
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item perso_ColorRougeMenu" href="temperatures">Températures</a>
-          <a class="dropdown-item perso_ColorRougeMenu" href="chocolat">Le Chocolat</a>
-          <a class="dropdown-item perso_ColorRougeMenu" href="plantes">Les plantes toxiques</a>
-          <a class="dropdown-item perso_ColorRougeMenu" href="sterilisation">Stérilisation</a>
-          <a class="dropdown-item perso_ColorRougeMenu" href="educateur">Educateur canin</a>
+          <a class="dropdown-item perso_ColorRougeMenu" href="<?= URL ?>temperatures">Températures</a>
+          <a class="dropdown-item perso_ColorRougeMenu" href="<?= URL ?>chocolat">Le Chocolat</a>
+          <a class="dropdown-item perso_ColorRougeMenu" href="<?= URL ?>plantes">Les plantes toxiques</a>
+          <a class="dropdown-item perso_ColorRougeMenu" href="<?= URL ?>sterilisation">Stérilisation</a>
+          <a class="dropdown-item perso_ColorRougeMenu" href="<?= URL ?>educateur">Educateur canin</a>
 
       </li>
 
@@ -56,9 +56,9 @@ require_once"config/config.php";
           Contacts
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item perso_ColorBleuMenu" href="contact">Contact</a>
-          <a class="dropdown-item perso_ColorBleuMenu" href="don">Dons</a>
-          <a class="dropdown-item perso_ColorBleuMenu" href="mentions">Mentions Légales</a>
+          <a class="dropdown-item perso_ColorBleuMenu" href="<?= URL ?>contact">Contact</a>
+          <a class="dropdown-item perso_ColorBleuMenu" href="<?= URL ?>don">Dons</a>
+          <a class="dropdown-item perso_ColorBleuMenu" href="<?= URL ?>mentions">Mentions Légales</a>
       </li>
 
     
