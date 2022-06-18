@@ -12,11 +12,11 @@ echo (styleTitreNiveau1("Nouvelles", COLOR_ACTUS))
 
     <div class="row no-gutters mt-3 align-items-center" style="min-height: 300px;">
         <div class="p-12 col-md-3 text-center">
-            <img src="<?= URL ?>public/sources/images/Animaux/chat/<?php $actualite["image"]["url_image"] ?>" alt="framboise" style="max-height: 280px;">
+            <img src="<?= URL ?>public/sources/images/Animaux/chat/<?= $actualite["image"]["url_image"] ?>" alt="framboise" style="max-height: 280px;">
         </div>
         <div class="p-12 col-md-9">
             <p>
-            <?php $actualite["contenu_actualite"] ?>    
+            <?= $actualite["contenu_actualite"] ?>    
             </p>
         </div>
     </div>
@@ -25,7 +25,7 @@ echo (styleTitreNiveau1("Nouvelles", COLOR_ACTUS))
 
 <!-- Actualités en dur -->
 <!-- ----------------  -->
-<div class="row border-bottom">
+<!-- <div class="row border-bottom">
     <?= styleTitrePost("Posté le : <span class'" . COLOR_ACTUS . "'>05/2018 </span> par <span class = perso_ColorVertMenu> Framboise</span>") ?>
 </div>
 
@@ -55,7 +55,7 @@ echo (styleTitreNiveau1("Nouvelles", COLOR_ACTUS))
     <p>
         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut ut numquam cumque non nulla minus quidem repellat dolorum blanditiis enim.
     </p>
-</div>
+</div> -->
 
 
 
