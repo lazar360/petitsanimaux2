@@ -3,7 +3,7 @@
 <?= styleTitreNiveau1($animal['nom_animal'], COLOR_PENSIONNAIRE) ?>
 <div class='row border border-dark rounded-lg m-2 align-items-center <?= ($animal['sexe']) ? "perso_bgGreen" : "perso_bgRose" ?>'>
     <div class="col p-2 text-center">
-    <img src='public/sources/images/Animaux/<?= $animal['type_animal'] ?>/<?= $image['url_image'] ?>' class="img-thumbnail" style="max-height:180px;" alt="<?= $image['libelle_image'] ?>" />
+    <img src='<?= URL ?>public/sources/images/Animaux/<?= $animal['type_animal'] ?>/<?= $image['url_image'] ?>' class="img-thumbnail" style="max-height:180px;" alt="<?= $image['libelle_image'] ?>" />
     </div>
     <?php 
         $iconeChien = "";
@@ -20,9 +20,9 @@
         else if($animal['ami_enfant'] === "N/A") $inconeEnfant = "babyQuest";
     ?>
     <div class="col-2 col-md-1 border-left border-right border-dark text-center">
-        <img src='public/sources/images/Autres/icones/<?= $iconeChien  ?>.png' class="img-fluid m-1" style="width:50px;" alt="chienOk" />
-        <img src='public/sources/images/Autres/icones/<?= $iconeChat  ?>.png' class="img-fluid m-1" style="width:50px;" alt="chatOk" />
-        <img src='public/sources/images/Autres/icones/<?= $inconeEnfant  ?>.png' class="img-fluid m-1" style="width:50px;" alt="bayOk" />
+        <img src='<?= URL ?>public/sources/images/Autres/icones/<?= $iconeChien  ?>.png' class="img-fluid m-1" style="width:50px;" alt="chienOk" />
+        <img src='<?= URL ?>public/sources/images/Autres/icones/<?= $iconeChat  ?>.png' class="img-fluid m-1" style="width:50px;" alt="chatOk" />
+        <img src='<?= URL ?>public/sources/images/Autres/icones/<?= $inconeEnfant  ?>.png' class="img-fluid m-1" style="width:50px;" alt="bayOk" />
     </div>
     <div class="col-6 col-md-4 text-center">
         <div class="mb-2">Puce : <?= $animal['puce'] ?></div>
@@ -53,7 +53,7 @@
         <div class="carousel-inner text-center">
             <?php foreach($images as $key => $image) : ?>
                 <div class="carousel-item <?php echo ($key === 0) ? "active" : "" ?>">
-                    <img src="public/sources/images/Animaux/<?= $animal['type_animal'] ?>/<?= $image['url_image']?>" class="img-thumbnail" style="height:500px" alt="<?= $image['libelle_image']?>">
+                    <img src="<?= URL ?>public/sources/images/Animaux/<?= $animal['type_animal'] ?>/<?= $image['url_image']?>" class="img-thumbnail" style="height:500px" alt="<?= $image['libelle_image']?>">
                 </div>
             <?php endforeach; ?>
         </div>
@@ -74,17 +74,17 @@
         </div>
         <hr />
         <div>
-            <img src="public/sources/images/Autres/icones/IconeAdopt.png" alt="" width="50" height="50" class="d-block mx-auto">
+            <img src="<?= URL ?>public/sources/images/Autres/icones/IconeAdopt.png" alt="" width="50" height="50" class="d-block mx-auto">
             <?= $animal['adoption_description_animal']?>
         </div>
         <hr />
         <div>
-            <img src="public/sources/images/Autres/icones/oeil.jpg" alt="" width="50" height="50" class="d-block mx-auto">
+            <img src="<?= URL ?>public/sources/images/Autres/icones/oeil.jpg" alt="" width="50" height="50" class="d-block mx-auto">
             <?= $animal['localisation_description_animal']?>
         </div>
         <hr />
         <div>
-            <img src="public/sources/images/Autres/icones/iconeContrat.png" alt="" width="50" height="50" class="d-block mx-auto">
+            <img src="<?= URL ?>public/sources/images/Autres/icones/iconeContrat.png" alt="" width="50" height="50" class="d-block mx-auto">
             <?= $animal['engagemet_description_animal']?>
         </div>
     </div>
