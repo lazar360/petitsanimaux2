@@ -4,6 +4,8 @@ require_once "models/animal.dao.php";
 require_once "models/actualite.dao.php";
 require_once "config/config.php";
 require_once "controllers/frontend.controller.php";
+require_once "config/Securite.class.php";
+
 
 function getPageAccueil()
 {
@@ -141,15 +143,23 @@ function getPageActus()
     $title = "Les Actus";
     $description = "C'est la page des actus des adoptés";
 
-    $actualites = getActualitesFromBD();
+    if(isset($_GET['type']) && !empty($_GET['type'])){
+        $typeNews = Securite::secureHTML($_GET['type']);
+        $actualites = getActualitesFromBD($typeNews);
     
-    foreach($actualites as $key => $actualite){
-        $image = getImageActualiteFromBD($actualite['id_image']);
-        $actualites[$key]["image"] = $image;
+        foreach($actualites as $key => $actualite){
+            $image = getImageActualiteFromBD($actualite['id_image']);
+            $actualites[$key]["image"] = $image;
+    
+        }
+        
+        require_once "views/front/actus/nouvelles.view.php";
 
+    } else {
+        throw new Exception("Le type d'actualité n'est pas renseigné.");
     }
+
     
-    require_once "views/front/actus/nouvelles.view.php";
 }
 
 function getPageAnimal()

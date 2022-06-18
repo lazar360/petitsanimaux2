@@ -6,7 +6,9 @@ try{
 
     if (isset($_GET['page']) && !empty($_GET['page'])) {
         $page = Securite::secureHTML($_GET['page']); 
+        
         switch ($page) {
+            
             case 'accueil': 
                 getPageAccueil();
                 break;
@@ -43,7 +45,7 @@ try{
             case 'mentions':
                 getPageMentions();        
                 break;      
-            case 'nouvelles':
+            case 'actus':
                 getPageActus();        
                 break;
             case 'animal':
