@@ -7,12 +7,12 @@ echo (styleTitreNiveau1("Nouvelles", COLOR_ACTUS))
 <!-- Actualités en dynamique -->
 <!-- ----------------  -->
 <?php foreach ($actualites as $actualite) :
-    echo(styleTitrePost("Posté le : <span class'" . COLOR_ACTUS . "'>" . $actualite['date_publication_actualite'] . "</span> : <span class = perso_ColorVertMenu> " . $actualite['libelle_actualite'] . "</span>"))
+    echo(styleTitrePost("Posté le : <span class'" . COLOR_ACTUS . "'>" . date("d/m/Y", strtotime($actualite['date_publication_actualite'])) . "</span> : <span class = perso_ColorVertMenu> " . $actualite['libelle_actualite'] . "</span>"))
 ?>
 
     <div class="row no-gutters mt-3 align-items-center" style="min-height: 300px;">
         <div class="p-12 col-lg-3 text-center">
-            <img src="<?= URL ?>public/sources/images/Animaux/chat/<?= $actualite["image"]["url_image"] ?>" alt="<?= $actualite["image"]["libelle_image"] ?>" style="max-height: 280px;" class="img-fluid p-2">
+            <img src="<?= URL ?>public/sources/images/sites/<?= $actualite["image"]["url_image"] ?>" alt="<?= $actualite["image"]["libelle_image"] ?>" style="max-height: 280px;" class="img-fluid p-2">
         </div>
         <div class="p-12 col-md-9">
             <p>
