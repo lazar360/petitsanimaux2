@@ -33,9 +33,9 @@ require_once"config/config.php";
           Actus
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-        <a class="dropdown-item perso_ColorVertMenu" href="<?= URL ?>nouvelles">Nouvelles des adoptés</a>
-        <!--<a class="dropdown-item perso_ColorVertMenu" href="#">Evènements</a>
-        <a class="dropdown-item perso_ColorVertMenu" href="../Global/actus.php">Nos actions au quotidien</a>-->
+        <a class="dropdown-item perso_ColorVertMenu" href="<?= URL ?>actus&type=<?= TYPE_NEWS ?>">Nouvelles des adoptés</a>
+        <a class="dropdown-item perso_ColorVertMenu" href="<?= URL ?>actus&type=<?= TYPE_EVENTS ?>">Evènements</a>
+        <a class="dropdown-item perso_ColorVertMenu" href="<?= URL ?>actus&type=<?= TYPE_ACTIONS ?>">Nos actions au quotidien</a>
       </li>
 
       <li class="nav-item dropdown">
