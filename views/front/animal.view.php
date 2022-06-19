@@ -3,7 +3,7 @@
 <?= styleTitreNiveau1($animal['nom_animal'], COLOR_PENSIONNAIRE) ?>
 <div class='row border border-dark rounded-lg m-2 align-items-center <?= ($animal['sexe']) ? "perso_bgGreen" : "perso_bgRose" ?>'>
     <div class="col p-2 text-center">
-    <img src='<?= URL ?>public/sources/images/Animaux/<?= $animal['type_animal'] ?>/<?= $image['url_image'] ?>' class="img-thumbnail" style="max-height:180px;" alt="<?= $image['libelle_image'] ?>" />
+    <img src='<?= URL ?>public/sources/images/sites/<?= $image['url_image'] ?>' class="img-thumbnail" style="max-height:180px;" alt="<?= $image['libelle_image'] ?>" />
     </div>
     <?php 
         $iconeChien = "";
@@ -25,8 +25,8 @@
         <img src='<?= URL ?>public/sources/images/Autres/icones/<?= $inconeEnfant  ?>.png' class="img-fluid m-1" style="width:50px;" alt="bayOk" />
     </div>
     <div class="col-6 col-md-4 text-center">
-        <div class="mb-2">Puce : <?= $animal['puce'] ?></div>
-        <div class="mb-2">Né : <?= $animal['date_naissance_animal']?></div>
+        <div class="mb-2">Puce : <?= $animal['puce'] ? "Oui" : "Non" ?></div>
+        <div class="mb-2">Né : <?= date("d/m/Y", strtotime($animal['date_naissance_animal'])) ?></div>
         
         <div class="my-3">
             <?php foreach ($caracteres as $caractere) {?>
@@ -53,7 +53,7 @@
         <div class="carousel-inner text-center">
             <?php foreach($images as $key => $image) : ?>
                 <div class="carousel-item <?php echo ($key === 0) ? "active" : "" ?>">
-                    <img src="<?= URL ?>public/sources/images/Animaux/<?= $animal['type_animal'] ?>/<?= $image['url_image']?>" class="img-thumbnail" style="height:500px" alt="<?= $image['libelle_image']?>">
+                    <img src="<?= URL ?>public/sources/images/sites/<?= $image['url_image'] ?>" class="img-thumbnail" style="height:500px" alt="<?= $image['libelle_image']?>">
                 </div>
             <?php endforeach; ?>
         </div>
