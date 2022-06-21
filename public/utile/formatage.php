@@ -28,5 +28,26 @@ function styleTitrePost($text){
     return $txt;
 }
 
+function affichageCoupe($str, $taille){
+
+    $desc = "";
+    if(strlen($str) >$taille/2){
+        if(strpos($str, '<br />', ($taille/2)) < $taille){
+            $desc = substr($str, 0, strpos($str, '<br />', ($taille/2)));
+        } else if(strpos($str, '.', ($taille/2)) < $taille){
+            $desc = substr($str, 0, strpos($str, '.', ($taille/2)));
+        } else if(strpos($str, '<br />', 0) <= ($taille/2)){
+            $desc = substr($str, 0, strpos($str, '<br />', 0));
+        } else if(strpos($str, '.', 0) <= ($taille/2)){
+            $desc = substr($str, 0, strpos($str, '.', 0));
+        } else {
+            $desc = substr($str, 0, strpos($str, ' ', ($taille/3)));
+        }
+    } else {
+        $desc = $str;
+    }
+    $desc .= "<b class='text-primary'>[...]</b>";
+    return $desc;
+}
 
 ?>
