@@ -1,4 +1,4 @@
-<?php 
+<?php
 ob_start();
 
 echo (styleTitreNiveau1("Ils ont besoin de vous !", COLOR_ASSO));
@@ -6,52 +6,31 @@ echo (styleTitreNiveau1("Ils ont besoin de vous !", COLOR_ASSO));
 
 <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
   <ol class="carousel-indicators">
-    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active bg-dark"></li>
-    <li data-target="#carouselExampleIndicators" data-slide-to="1" class="bg-dark"></li>
-    <!-- <li data-target="#carouselExampleIndicators" data-slide-to="2" class="bg-dark"></li> -->
+    <?php for ($i = 0; $i < count($animaux); $i++) : ?>
+      <li data-target="#carouselExampleIndicators" data-slide-to="<?= $i ?>" class="<?php echo ($i === 0) ? "active" : "" ?>active bg-dark"></li>
+    <?php endfor; ?>
   </ol>
-
+  <!-- Partie caroussel de la page (tout en haut) -->
   <div class="carousel-inner">
-    <!-- Début d'un item -->
-    <div class="carousel-item active">
-      <div class="row no-gutters border rounded overflow-hidden mb-4 perso_bgRose">
-        <div class="col-12 col-md-auto text-center">
-          <img src="<?= URL ?>public/sources/images/Animaux/chat/framboise/framboise.jpg" style="height: 250px;" alt="Photo de Framboise">
-        </div>
-        <div class="col-12 col-md">
-          <div class="col p-4 d-flex flex-column position-static">
-            <h3 class="mb-0 perso_policeTitre perso_ColorRoseMenu perso_textShadow">Framboise</h3>
-            <div class="text-muted mb-1">02/2019</div>
-            <p class="perso_policeTexte" style="margin-bottom: 70px;">
-              Description de Framboise
-            </p>
-            <a href="#" class="btn btn-primary">Visiter ma page</a>
-
+    <?php foreach ($animaux as $key => $animal) : ?>
+      <div class="carousel-item <?php echo ($key === 0) ? "active" : "" ?> ">
+        <div class="row no-gutters border rounded overflow-hidden mb-4 <?= ($animal['sexe']) ? 'perso_bgBleu' : 'perso_bgRose' ?>">
+          <div class="col-12 col-md-auto text-center">
+            <img src="<?= URL ?>public/sources/images/sites/<?= $animal['image']['url_image'] ?>" style="height: 250px;" alt="<?= $animal['image']['libelle_image'] ?>">
+          </div>
+          <div class="col-12 col-md">
+            <div class="col p-4 d-flex flex-column position-static">
+              <h3 class="mb-0 perso_policeTitre <?= ($animal['sexe']) ? 'perso_ColorBleuMenu' : 'perso_ColorRoseMenu' ?> perso_textShadow"><?= $animal['nom_animal'] ?></h3>
+              <div class="text-muted mb-1"><?= date("d/m/Y", strtotime($animal['date_naissance_animal'])) ?></div>
+              <p class="perso_policeTexte" style="margin-bottom: 70px;">
+                  <?= $animal['description_animal']  ?>
+              </p>
+              <a href="animal&idAnimal=<?= $animal['id_animal'] ?>" class="btn btn-primary">Visiter ma page</a>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-    <!-- Fin d'un item -->
-
-    <!-- Début d'un item -->
-    <div class="carousel-item">
-      <div class="row no-gutters border rounded overflow-hidden mb-4 perso_bgRose">
-        <div class="col-12 col-md-auto text-center">
-          <img src="<?= URL ?>public/sources/images/animaux/chat/framboise/framboise.jpg" style="height: 250px;" alt="Photo de Framboise">
-        </div>
-        <div class="col-12 col-md">
-          <div class="col p-4 d-flex flex-column position-static">
-            <h3 class="mb-0 perso_policeTitre perso_ColorRoseMenu perso_textShadow">Framboise</h3>
-            <div>02/2019</div>
-            <p class="perso_policeTexte" style="margin-bottom: 70px;">
-              Description de Framboise
-            </p>
-            <a href="#" class="btn btn-primary">Visiter ma page</a>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- Fin d'un item -->
+    <?php endforeach; ?>
   </div>
 </div>
 
@@ -74,39 +53,45 @@ echo (styleTitreNiveau1("Ils ont besoin de vous !", COLOR_ASSO));
 </div>
 
 <div class="row">
+  <!-- Partie en bas à gauche : rappel des actus -->
   <div class="col-6">
     <div class="row no-gutters border rounded mb-4">
       <div class="col-auto d-none d-lg-block">
-        <img src="<?= URL ?>public/sources/images/Animaux/chat/framboise/framboise.jpg" style="height: 170px;" alt="photo de framboise" />
+        <img src="<?= URL ?>public/sources/images/sites/<?= $news['url_image'] ?>" style="height: 170px;" alt="<?= $news['libelle_image'] ?>" />
       </div>
       <div class="col p-3 d-flex flex-column position-static perso_bgGreen">
-        <h3 class="mb-0 mb-0 perso_policeTitre perso_ColorVertMenu perso_textShadow">Doyenne Chipie</h3>
+        <h3 class="mb-0 mb-0 perso_policeTitre perso_ColorVertMenu perso_textShadow"><?= $news['libelle_actualite'] ?></h3>
         <p class="perso_size12  mt-2">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit saepe quidem ipsam repudiandae culpa cumque doloremque, modi quam magni corporis sed, voluptatibus nihil eveniet ad perspiciatis asperiores, hic vero molestias!
+            <?= $news['contenu_actualite'] ?>
         </p>
-        <a href="#" class="btn btn-primary">Visiter ma page</a>
+        <a href="<?= URL ?>actus&type=<?= TYPE_NEWS ?>" class="btn btn-primary">Voir les nouvelles des adoptés</a>
       </div>
     </div>
   </div>
 
+  <!-- Partie en bas à droite Partie actions et évènements -->
+  
   <div class="col-6">
     <div class="row no-gutters border rounded mb-4">
       <div class="col-auto d-none d-lg-block">
-        <img src="<?= URL ?>public/sources/images/Animaux/chat/framboise/framboise.jpg" style="height: 170px;" alt="photo de framboise" />
+        <img src="<?= URL ?>public/sources/images/sites/<?= $actions['url_image'] ?>" style="height: 170px;" alt="<?= $actions['libelle_image'] ?>" />
       </div>
       <div class="col p-3 d-flex flex-column position-static perso_bgOrange">
-        <h3 class="mb-0 mb-0 perso_policeTitre perso_ColorOrangeMenu perso_textShadow">Doyenne Chipie</h3>
+        <h3 class="mb-0 mb-0 perso_policeTitre perso_ColorOrangeMenu perso_textShadow"><?=$actions['libelle_actualite'] ?></h3>
         <p class="perso_size12 mt-2">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit saepe quidem ipsam repudiandae culpa cumque doloremque, modi quam magni corporis sed, voluptatibus nihil eveniet ad perspiciatis asperiores, hic vero molestias!
+            <?= $actions['contenu_actualite'] ?>
         </p>
-        <a href="#" class="btn btn-primary">Visiter ma page</a>
+        <span class="text-center">
+        <a href="<?= URL ?>actus&type=<?= TYPE_EVENTS ?>" class="btn btn-primary">Les évènements</a>
+        <a href="<?= URL ?>actus&type=<?= TYPE_ACTIONS ?>" class="btn btn-primary">Les actions</a>
+        </span>
       </div>
     </div>
 
   </div>
 </div>
 
-<?php 
+<?php
 $content = ob_get_clean();
-require "views/commons/template.php" 
+require "views/commons/template.php"
 ?>

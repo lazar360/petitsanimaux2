@@ -11,7 +11,17 @@ function getPageAccueil()
 {
 
     $title = "Page d'accueil";
-    $description = "C'est la page d'accueil";
+    $description = "Nos Amis Nos Animaux (N.A.N.A)";
+    
+    $animaux = getAnimalFromStatus(ID_STATUT_A_L_ADOPTION);
+    foreach ($animaux as $key => $animal) {
+        $image = getFirstImageAnimal($animal['id_animal']);
+        $animaux[$key]['image'] = $image;
+    }
+
+    $news = getLastNews();
+    $actions= getLastActionsOrEvents();
+
 
     require_once "views/front/accueil.view.php";
 }
