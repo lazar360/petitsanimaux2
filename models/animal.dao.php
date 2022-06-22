@@ -1,21 +1,20 @@
 <?php
 require_once("pdo.php");
 
-function getAnimalFromStatus($idstatut) {
+function getAnimalFromStatus($idStatut){
     $bdd = connexionPDO();
-    $req = 'SELECT * 
-            FROM animal 
-            WHERE id_statut =:idStatut';
-
-    if ($_GET['idstatut'] == ID_STATUT_ADOPTE) {
-        $req .= ' or id_statut = ' . ID_STATUT_MORT;
+    $req = '
+    SELECT * 
+    FROM animal 
+    where id_statut = :idStatut';
+    if($idStatut === ID_STATUT_ADOPTE){
+        $req .= ' or id_statut = '.ID_STATUT_MORT;
     }
     $stmt = $bdd->prepare($req);
-    $stmt->bindValue(":idStatut", $_GET["idstatut"]);
+    $stmt->bindValue(":idStatut",$idStatut,PDO::PARAM_INT);
     $stmt->execute();
     $animaux = $stmt->fetchAll(PDO::FETCH_ASSOC);
     $stmt->closeCursor();
-
     return $animaux;
 }
 
