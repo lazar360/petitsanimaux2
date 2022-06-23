@@ -1,7 +1,10 @@
 <?php
-
+session_start();
 require_once "controllers/frontend.controller.php";
+require_once "controllers/backend.controller.php";
 require_once "config/Securite.class.php";
+
+
 try{
 
     if (isset($_GET['page']) && !empty($_GET['page'])) {
@@ -50,6 +53,9 @@ try{
                 break;
             case 'animal':
                 getPageAnimal();        
+                break; 
+            case "login":
+                getPageLogin();
                 break; 
             case 'error301':   
             case 'error302':         
