@@ -13,15 +13,15 @@ echo(styleTitreNiveau1("Suivez-nous :", COLOR_CONTACT))
 <?= styleTitreNiveau3("Contactez-nous :", COLOR_CONTACT) ?>
 <div class="pl-5">
     <p>
-        <img src="public/sources/images/Autres/icones/courrier.png" width="30px" alt="courrier"/>
+        <img src="<?= URL ?>public/sources/images/Autres/icones/courrier.png" width="30px" alt="courrier"/>
         Par courrier : Hameau de la Souleille - 09420 Clermont, Midi-Pyrenees, France
     </p>
     <p>
-        <img src="public/sources/images/Autres/icones/mail.png" width="30px" alt="mail"/>
+        <img src="<?= URL ?>public/sources/images/Autres/icones/mail.png" width="30px" alt="mail"/>
         Par mail : <a href="mailto:associationnosamisnosanimaux@gmail.com">associationnosamisnosanimaux@gmail.com</a>
     </p>
     <p>
-        <img src="public/sources/images/Autres/icones/tel.png" width="30px" alt="tel"/>
+        <img src="<?= URL ?>public/sources/images/Autres/icones/tel.png" width="30px" alt="tel"/>
         Par téléphone : 06 10 59 94 71
     </p>
     <p>
