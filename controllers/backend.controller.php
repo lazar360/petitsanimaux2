@@ -73,6 +73,8 @@ function getPageNewsAdmin(){
     $title = "Page de gestion des news";
     $description = "Page de gestion des news";
     
+    $typeActualites = getTypesActualite();
+
     require_once "views/back/adminNews.view.php";
 
   } else {
@@ -80,3 +82,5 @@ function getPageNewsAdmin(){
   }
 
 }
+
+
