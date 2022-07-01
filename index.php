@@ -4,7 +4,6 @@ require_once "controllers/frontend.controller.php";
 require_once "controllers/backend.controller.php";
 require_once "config/Securite.class.php";
 
-
 try{
 
     if (isset($_GET['page']) && !empty($_GET['page'])) {
@@ -57,6 +56,15 @@ try{
             case "login":
                 getPageLogin();
                 break; 
+            case "admin" :
+                getPageAdmin();
+                break;
+            case "genererPensionnaireAdmin" :
+                getPagePensionnaireAdmin();
+                break;
+            case "genererNewsAdmin" :
+                getPageNewsAdmin();
+                break;
             case 'error301':   
             case 'error302':         
             case 'error400':
