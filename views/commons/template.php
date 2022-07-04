@@ -44,7 +44,7 @@
 
     <!-- Site footer -->
     <footer class="bg-dark text-center text-white rounded-bottom perso_shadow" style="margin-top: 105px;">
-        <div class="p-2">&copy; Sur modèle Udemy / Matthieu GASTON <?php echo date("Y"); ?> </div>
+        <div class="p-2">&copy; Sur modèle Udemy / H2Prog - Matthieu GASTON <?php echo date("Y"); ?> </div>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
