@@ -82,3 +82,21 @@ function getLastActionsOrEvents(){
 
 
 }
+
+function getTypesActualite(){
+
+    $bdd = connexionPDO();
+    $req = 'SELECT DISTINCT a.type_actualite 
+            FROM actualite a 
+            ;
+            ';
+
+    
+    $stmt = $bdd->prepare($req);
+    $stmt->execute();
+    $typeActualites = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $stmt->closeCursor();
+
+    return $typeActualites;
+
+}
