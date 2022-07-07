@@ -88,14 +88,14 @@ function getTypesActualite(){
     $bdd = connexionPDO();
     $req = 'SELECT DISTINCT a.type_actualite 
             FROM actualite a 
-            ;
+            ORDER BY a.type_actualite ASC;
             ';
-
-    
     $stmt = $bdd->prepare($req);
     $stmt->execute();
-    $typeActualites = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $typeActualites2D = $stmt->fetchAll(PDO::FETCH_ASSOC);
     $stmt->closeCursor();
+
+    $typeActualites = array_map('current', $typeActualites2D); //Le truc pour passer de tableau 2D à tableau 1D
 
     return $typeActualites;
 
