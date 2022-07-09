@@ -100,3 +100,23 @@ function getTypesActualite(){
     return $typeActualites;
 
 }
+
+function insertActualiteIntoBD($titreActu, $typeActu, $contenuActu, $dateActu, $image){
+
+    $bdd = connexionPDO();
+    $req = '
+    INSERT INTO actualite(libelle_actualite, contenu_actualite, date_publication_actualite, id_image, type_actualite) 
+    VALUES (:titre, :contenu, :date, :image, :type);
+    ';
+    $stmt = $bdd->prepare($req);
+    $stmt->bindValue(':titre', $titreActu, PDO::PARAM_STR);
+    $stmt->bindValue(':contenu', $contenuActu, PDO::PARAM_STR);
+    $stmt->bindValue(':date', $dateActu, PDO::PARAM_STR);
+    $stmt->bindValue(':image', $image, PDO::PARAM_INT);
+    $stmt->bindValue(':type', $typeActu, PDO::PARAM_STR);
+    $resultat = $stmt->execute();
+    $stmt->closeCursor();
+    if($resultat > 0) return true;
+    else return false;
+
+}
