@@ -11,12 +11,13 @@ function getPageLogin(){
 
     $title = "Page de login du site";
     $description = "Page de login";
-
+    $alert ="";
+    
     if(Securite::verificationAccess()){
       header("Location: admin");   
     }
 
-    $alert ="";
+    
     if(isset($_POST['login']) && !empty($_POST['login']) && isset($_POST['password']) && !empty($_POST['password'])){
       $login = Securite::secureHTML($_POST['login']);
       $password = Securite::secureHTML($_POST['password']);
@@ -26,7 +27,9 @@ function getPageLogin(){
         Securite::genereCookiePassword();
         header("Location: admin");
       } else {
+
         $alert = "Mot de passe invalide !";
+        
       }
     }
 
@@ -69,6 +72,7 @@ function getPagePensionnaireAdmin(){
 
 function getPageNewsAdmin(){
   $alert ="";
+  $alertType = 0;
   if(isset($_POST['titreActu']) && !empty($_POST['titreActu'])
   && isset($_POST['contenuActu']) && !empty($_POST['contenuActu'])
   ){
@@ -79,8 +83,10 @@ function getPageNewsAdmin(){
     $dateActu = date("Y-m-d H:i:s", time());
     if(insertActualiteIntoBD($titreActu, $typeActu, $contenuActu, $dateActu, 1)){
       $alert = "La création de l'actualité est effectuée";
+      $alertType = ALERT_SUCCESS;
     } else {
       $alert = "Il y a une erreur";
+      $alertType = ALERT_DANGER;
     }
   }
   
