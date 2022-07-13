@@ -71,7 +71,7 @@ function getPagePensionnaireAdmin(){
 
 }
 
-function getPageNewsAdmin($require ="", $alert="",$alertType=""){
+function getPageNewsAdmin($require ="", $alert="",$alertType="", $data=""){
     
   if(Securite::verificationAccess()){
       Securite::genereCookiePassword();
@@ -122,7 +122,12 @@ function getPageNewsAdminAjout(){
 
 function getPageNewsAdminModif(){
   $alert = "";
-  getPageNewsAdmin("views/back/adminNewsModif.view.php");
+  if (isset($_POST['typeActu']) && $_POST['etape']>=2){
+      $typeActu = Securite::secureHTML($_POST['typeActu']);
+      $data['actualites'] = getActualitesFromBD($typeActu); //Attention je n'ai pas suivi le tuto ici ; j'envoie un string du type de l'actu et pas un int
+      
+  }
+  getPageNewsAdmin("views/back/adminNewsModif.view.php", $alert, $data); //J'ai enlevé alertType mais il faut remettre la variable
 }
 
 function getPageNewsAdminSup(){
