@@ -65,6 +65,15 @@ try{
             case "genererNewsAdmin" :
                 getPageNewsAdmin();
                 break;
+            case "genererNewsAdminAjout" :
+                getPageNewsAdminAjout();
+                break;
+            case "genererNewsAdminModif" :
+                getPageNewsAdminModif();
+                break;
+            case "genererNewsAdminSup" :
+                getPageNewsAdminSup();
+                break;
             case 'error301':   
             case 'error302':         
             case 'error400':
