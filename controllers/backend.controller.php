@@ -121,13 +121,27 @@ function getPageNewsAdminAjout(){
 }
 
 function getPageNewsAdminModif(){
-  $alert = "";
-  if (isset($_POST['typeActu']) && $_POST['etape']>=2){
+  $alert = "" ;
+  $alertType="";
+  $data = [];
+  if (isset($_POST['etape']) 
+  && !empty($_POST['typeActu']) 
+  && (int)$_POST['etape']>=2){
       $typeActu = Securite::secureHTML($_POST['typeActu']);
-      $data['actualites'] = getActualitesFromBD($typeActu); //Attention je n'ai pas suivi le tuto ici ; j'envoie un string du type de l'actu et pas un int
-      
-  }
-  getPageNewsAdmin("views/back/adminNewsModif.view.php", $alert, $data); //J'ai enlevé alertType mais il faut remettre la variable
+      $data['actualites'] = getActualitesFromBD($typeActu); //Attention je n'ai pas suivi le tuto ici ; j'envoie un string du type de l'actu et pas un int 
+    } 
+
+    if (isset($_POST['etape']) 
+   // && !empty($_POST['typeActu']) 
+    && (int)$_POST['etape']>=3){
+        $actualite = Securite::secureHTML($_POST['actualites']);
+        $data['actualite'] = getActualiteFromBD($actualite); //Attention je n'ai pas suivi le tuto ici ; j'envoie un string du type de l'actu et pas un int 
+        print_r($data['actualite']);
+        
+      } 
+
+  
+  getPageNewsAdmin("views/back/adminNewsModif.view.php", $alert, $alertType, $data); 
 }
 
 function getPageNewsAdminSup(){
