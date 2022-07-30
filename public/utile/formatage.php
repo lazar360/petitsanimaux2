@@ -50,4 +50,21 @@ function affichageCoupe($str, $taille){
     return $desc;
 }
 
+function afficherAlert($text, $type){
+    
+    $arrayAlertType = array(
+        ALERT_SUCCESS => "success",
+        ALERT_DANGER => "danger",
+        ALERT_INFO => "info",
+        ALERT_WARNING => "warning"
+    );
+
+    $alertType = $arrayAlertType[$type];
+
+    $txt = '<div class="alert alert-'.$alertType.' m-2" role="alert">';
+    $txt .= $text;
+    $txt .= '</div>';
+    return $txt;
+}
+
 ?>
