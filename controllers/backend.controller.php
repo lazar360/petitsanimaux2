@@ -143,33 +143,36 @@ function getPageNewsAdminModif(){
     if (isset($_POST['etape'])  
     && (int)$_POST['etape']>=4){
       //print_r($data['actualites']); exit();
+      //print_r($data['actualites'][0]); exit();
 
       $titreActu = Securite::secureHTML($_POST['titreActu']);
       $typeActu = Securite::secureHTML($_POST['typeActu']);
       $contenuActu = Securite::secureHTML($_POST['contenuActu']);
-      $idImage = $data['actualites']['id_image'];
-      $idActualite = $data['actualites']['id_actualite'];
+      $idImage = $data['actualites'][0]['id_image'];
+      $idActualite = $data['actualites'][0]['id_actualite'];
       
       try{
         // A compléter :
         if($_FILES['imageActu']['size'] > 0) {
+          $fileImage = $_FILES['imageActu'];
+          $repertoire = "public/sources/images/sites/news/";
           $nomImage = ajoutImage($fileImage, $repertoire, $titreActu);
           $idImage=insertImageNewsIntoBD($nomImage, "news/".$nomImage);
         }
         
-
-        if(insertActualiteIntoBD($titreActu,$typeActu,$contenuActu,$date,$idImage)){
-            $alert = "La création de l'actualité est effectuée";
+        if(updateActualiteIntoBD($idActualite, $titreActu,$typeActu,$contenuActu,$idImage)){
+            $alert = "La modification de l'actualité est effectuée";
             $alertType = ALERT_SUCCESS;
         } else {
-           throw new Exception("L'insertion en BD n'a pas fonctionné");
+           throw new Exception("La modification en BD n'a pas fonctionné");
         }
     } catch(Exception $e){
-        $alert = "La création de l'actualité na pas fonctionnée <br />". $e->getMessage();
+        $alert = "La modification de l'actualité na pas fonctionnée <br />". $e->getMessage();
         $alertType = ALERT_DANGER;
     }
 
-
+    $data['actualite'] = getActualiteFromBD($actualite);
+    $data['actualites'] = getActualitesFromBD($typeActu);
     }
   
   getPageNewsAdmin("views/back/adminNewsModif.view.php", $alert, $alertType, $data); 
