@@ -156,3 +156,22 @@ function insertImageNewsIntoBD ($nomImage, $url){
     return $resultat;
 
 }
+
+    function updateActualiteIntoBD($idActualite, $titreActu,$typeActu,$contenuActu,$idImage){
+        $bdd = connexionPDO();
+        $req = '
+        UPDATE actualite 
+        SET libelle_actualite = :libelle, contenu_actualite = :contenu, type_actualite = :type, id_image = :image
+        WHERE id_actualite = :idActualite;
+        ';//Attention je n'ai pas id_type_actualite, j'ai type_actualite en BDD
+        $stmt = $bdd->prepare($req);
+        $stmt->bindValue(':libelle', $titreActu, PDO::PARAM_STR);
+        $stmt->bindValue(':contenu', $contenuActu, PDO::PARAM_STR);
+        $stmt->bindValue(':type', $typeActu, PDO::PARAM_STR);
+        $stmt->bindValue(':image', $idImage, PDO::PARAM_INT);
+        $stmt->bindValue(':idActualite', $idActualite, PDO::PARAM_INT);
+        $resultat = $stmt->execute();
+        $stmt->closeCursor();
+        if($resultat >0) return true;
+        return false;
+    }
