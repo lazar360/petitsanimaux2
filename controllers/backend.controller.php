@@ -134,12 +134,43 @@ function getPageNewsAdminModif(){
     if (isset($_POST['etape']) 
    // && !empty($_POST['typeActu']) 
     && (int)$_POST['etape']>=3){
+
         $actualite = Securite::secureHTML($_POST['actualites']);
         $data['actualite'] = getActualiteFromBD($actualite); //Attention je n'ai pas suivi le tuto ici ; j'envoie un string du type de l'actu et pas un int 
-        print_r($data['actualite']);
-        
+ 
       } 
+    
+    if (isset($_POST['etape'])  
+    && (int)$_POST['etape']>=4){
+      //print_r($data['actualites']); exit();
 
+      $titreActu = Securite::secureHTML($_POST['titreActu']);
+      $typeActu = Securite::secureHTML($_POST['typeActu']);
+      $contenuActu = Securite::secureHTML($_POST['contenuActu']);
+      $idImage = $data['actualites']['id_image'];
+      $idActualite = $data['actualites']['id_actualite'];
+      
+      try{
+        // A compléter :
+        if($_FILES['imageActu']['size'] > 0) {
+          $nomImage = ajoutImage($fileImage, $repertoire, $titreActu);
+          $idImage=insertImageNewsIntoBD($nomImage, "news/".$nomImage);
+        }
+        
+
+        if(insertActualiteIntoBD($titreActu,$typeActu,$contenuActu,$date,$idImage)){
+            $alert = "La création de l'actualité est effectuée";
+            $alertType = ALERT_SUCCESS;
+        } else {
+           throw new Exception("L'insertion en BD n'a pas fonctionné");
+        }
+    } catch(Exception $e){
+        $alert = "La création de l'actualité na pas fonctionnée <br />". $e->getMessage();
+        $alertType = ALERT_DANGER;
+    }
+
+
+    }
   
   getPageNewsAdmin("views/back/adminNewsModif.view.php", $alert, $alertType, $data); 
 }
