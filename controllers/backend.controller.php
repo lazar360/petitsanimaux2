@@ -180,6 +180,18 @@ function getPageNewsAdminModif(){
 
 function getPageNewsAdminSup(){
   $alert = "";
-  getPageNewsAdmin("views/back/adminNewsSup.view.php");
-}
+  $alertType = "";
+  
+  if(isset($_GET['sup'])){
+    try{
+      deleteActuFromBD(Securite::secureHTML($_GET['sup']));
+        $alert = "La suppression de l'actualité a  fonctionné";
+        $alertType = ALERT_SUCCESS;
 
+    } catch(exception $e){
+        $alert = "La suppression de l'actualité n'a pas fonctionné";
+        $alertType = ALERT_DANGER;
+    }
+  }
+  getPageNewsAdmin("", $alert, $alertType); 
+}
