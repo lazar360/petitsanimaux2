@@ -50,7 +50,7 @@ echo (styleTitreNiveau3("Choix", COLOR_ASSO));
         
     <input type="hidden" name="etape" value="4">
     <input type="hidden" name="typeActu" value="<?= $_POST['typeActu'] ?>"> 
-    <input type="hidden" name="actualites" value="<?= $_POST['actualites'] ?>">
+    <input type="hidden" id="idActualite" name="actualites" value="<?= $_POST['actualites'] ?>">
     <div class="form-row">
         <div class="form-group col-6">
             <label for="titreActu">Titre de l'actualité :</label>
@@ -79,6 +79,8 @@ echo (styleTitreNiveau3("Choix", COLOR_ASSO));
 
     <div class="row no-guters">
         <input type="submit" value="Valider" class="btn btn-primary col">
+        <button id="btnSup" class="btn btn-danger col">Supprimer</button>
+
     </div>
 </form>
 
