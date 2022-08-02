@@ -56,13 +56,15 @@ function getPageAdmin(){
   }
 }
 
-function getPagePensionnaireAdmin(){
+//Page pensionnaire
+//-----------------
+function getPagePensionnaireAdmin($require ="", $alert="",$alertType="", $data=""){
 
   if(Securite::verificationAccess()){
     Securite::genereCookiePassword();
     $title = "Page de gestion des pensionnaires";
     $description = "Page de gestion des pensionnaires";
-    
+    if($require !=="") require_once $require;
     require_once "views/back/adminPensionnaire.view.php";
 
   } else {
@@ -71,6 +73,33 @@ function getPagePensionnaireAdmin(){
 
 }
 
+function getPagePensionnaireAdminAjout(){
+  $alert = "" ;
+  $alertType="";
+  
+  getPageNewsAdmin("views/back/adminPensionnaireAjout.view.php",$alert,$alertType);
+}
+
+function getPagePensionnaireAdminModif(){
+  $alert = "" ;
+  $alertType="";
+  $data = [];
+ 
+  
+  getPageNewsAdmin("views/back/adminPensionnaireModif.view.php", $alert, $alertType, $data); 
+}
+
+function getPagePensionnaireAdminSup(){
+  $alert = "";
+  $alertType = "";
+  
+  
+  getPagePensionnaireAdmin("", $alert, $alertType); 
+}
+
+
+//Page News
+//---------
 function getPageNewsAdmin($require ="", $alert="",$alertType="", $data=""){
     
   if(Securite::verificationAccess()){
