@@ -4,6 +4,7 @@ require_once "public/utile/gestionImage.php";
 require_once "models/animal.dao.php";
 require_once "models/actualite.dao.php";
 require_once "models/admin.dao.php";
+require_once "models/image.dao.php";
 require_once "config/config.php";
 require_once "controllers/frontend.controller.php";
 require_once "config/Securite.class.php";
@@ -58,27 +59,79 @@ function getPageAdmin(){
 
 //Page pensionnaire
 //-----------------
-function getPagePensionnaireAdmin($require ="", $alert="",$alertType="", $data=""){
-
+function getPagePensionnaireAdmin($require ="", $alert="",$alertType="",$data=""){
   if(Securite::verificationAccess()){
-    Securite::genereCookiePassword();
-    $title = "Page de gestion des pensionnaires";
-    $description = "Page de gestion des pensionnaires";
-    if($require !=="") require_once $require;
-    require_once "views/back/adminPensionnaire.view.php";
+      Securite::genereCookiePassword();
+      $title = "Page de gestion des pensionnaires";
+      $description = "Page de gestion des pensionnaires";
 
+      $statuts = getStatutsAnimal();
+      //$caracteres = getListeCaracteresAnimal();
+
+      $contentAdminAction="";
+      if($require !=="") require_once $require;
+      require_once "views/back/adminPensionnaire.view.php";
   } else {
-    throw new Exception("Vous n'avez pas le droit d'accéder à cette page !");
+      throw new Exception("Vous n'avez pas le droit d'accéder à cette page");
   }
-
 }
 
 function getPagePensionnaireAdminAjout(){
   $alert = "" ;
-  $alertType="";
-  
-  getPageNewsAdmin("views/back/adminPensionnaireAjout.view.php",$alert,$alertType);
+  $alertType = 0;
+
+  if(isset($_POST['nom']) && !empty($_POST['nom']) &&
+  isset($_POST['dateN']) && !empty($_POST['dateN'])
+  ) {
+      $nom = Securite::secureHTML($_POST['nom']);
+      $puce = Securite::secureHTML($_POST['puce']);
+      $dateN = Securite::secureHTML($_POST['dateN']);
+      $type = Securite::secureHTML($_POST['type']);
+      $sexe = Securite::secureHTML($_POST['sexe']);
+      $statut = Securite::secureHTML($_POST['statut']);
+      $amiChien = Securite::secureHTML($_POST['amiChien']);
+      $amiChat = Securite::secureHTML($_POST['amiChat']);
+      $amiEnfant = Securite::secureHTML($_POST['amiEnfant']);
+      $description = Securite::secureHTML($_POST['description']);
+      $adoptionDesc = Securite::secureHTML($_POST['adoptionDesc']);
+      $localisation = Securite::secureHTML($_POST['localisation']);
+      $engagement = Securite::secureHTML($_POST['engagement']);
+      $caractere1 = 'gentil' ; //Securite::secureHTML($_POST['caractere1']);
+      $caractere2 = 'doux' ; //Securite::secureHTML($_POST['caractere2']);
+      $caractere3 = 'calme';//Securite::secureHTML($_POST['caractere3']);
+      
+      $fileImage = $_FILES['imageActu'];
+      $repertoire = "public/sources/images/sites/animaux/".$type."/".strtolower($nom)."/";
+      $idAnimal = insertAnimalIntoBD($nom,$puce,$dateN,$type,$sexe,$statut,$amiChien,$amiChat,$amiEnfant,$description,$adoptionDesc,$localisation,$engagement);
+
+      try{
+          
+          $nomImage = ajoutImage($fileImage, $repertoire, $nom);
+          $idImage = insertImageIntoBD($nomImage, "animaux/".$type."/".strtolower($nom)."/".$nomImage);
+          $idAnimal = insertAnimalIntoBD($nom,$puce,$dateN,$type,$sexe,$statut,$amiChien,$amiChat,$amiEnfant,$description,$adoptionDesc,$localisation,$engagement);
+          if($idAnimal >0){
+              //insertIntoContient($idImage,$idAnimal);
+              //insertIntoDispose($caractere1,$idAnimal);
+              if($caractere2 !== $caractere1){
+                  //insertIntoDispose($caractere2,$idAnimal);
+              }
+              if($caractere3 !== $caractere2 && $caractere3 !== $caractere1){
+                 // insertIntoDispose($caractere3,$idAnimal);
+              }
+              $alert = "La création de l'animal est effectuée";
+              $alertType = ALERT_SUCCESS;
+          } else {
+             throw new Exception("L'insertion en BD n'a pas fonctionné");
+          }
+      } catch(Exception $e){
+          $alert = "La création de l'animal n'a pas fonctionnée <br />". $e->getMessage();
+          $alertType = ALERT_DANGER;
+      }
+  }
+
+  getPagePensionnaireAdmin("views/back/adminPensionnaireAjout.view.php",$alert,$alertType);
 }
+
 
 function getPagePensionnaireAdminModif(){
   $alert = "" ;
@@ -86,7 +139,7 @@ function getPagePensionnaireAdminModif(){
   $data = [];
  
   
-  getPageNewsAdmin("views/back/adminPensionnaireModif.view.php", $alert, $alertType, $data); 
+  getPagePensionnaireAdmin("views/back/adminPensionnaireModif.view.php", $alert, $alertType, $data); 
 }
 
 function getPagePensionnaireAdminSup(){
@@ -133,7 +186,7 @@ function getPageNewsAdminAjout(){
       $date = date("Y-m-d H:i:s", time());
       try{
           $nomImage = ajoutImage($fileImage, $repertoire, $titreActu);
-          $idImage=insertImageNewsIntoBD($nomImage, "news/".$nomImage);
+          $idImage=insertImageIntoBD($nomImage, "news/".$nomImage);
 
           if(insertActualiteIntoBD($titreActu,$typeActu,$contenuActu,$date,$idImage)){
               $alert = "La création de l'actualité est effectuée";
@@ -186,7 +239,7 @@ function getPageNewsAdminModif(){
           $fileImage = $_FILES['imageActu'];
           $repertoire = "public/sources/images/sites/news/";
           $nomImage = ajoutImage($fileImage, $repertoire, $titreActu);
-          $idImage=insertImageNewsIntoBD($nomImage, "news/".$nomImage);
+          $idImage=insertImageIntoBD($nomImage, "news/".$nomImage);
         }
         
         if(updateActualiteIntoBD($idActualite, $titreActu,$typeActu,$contenuActu,$idImage)){
