@@ -139,24 +139,6 @@ function insertActualiteIntoBD($titreActu, $typeActu, $contenuActu, $dateActu, $
 
 }
 
-function insertImageNewsIntoBD ($nomImage, $url){
-
-    $bdd = connexionPDO();
-    $req = '
-    INSERT INTO image (libelle_image, url_image, description_image) 
-    VALUES (:nomImage, :url, :description);
-    ';
-    $stmt = $bdd->prepare($req);
-    $stmt->bindValue(':nomImage', $nomImage, PDO::PARAM_STR);
-    $stmt->bindValue(':url', $url, PDO::PARAM_STR);
-    $stmt->bindValue(':description', $nomImage, PDO::PARAM_STR);
-    $stmt->execute();
-    $resultat = $bdd->lastInsertId();
-    $stmt->closeCursor();
-    return $resultat;
-
-}
-
     function updateActualiteIntoBD($idActualite, $titreActu,$typeActu,$contenuActu,$idImage){
         $bdd = connexionPDO();
         $req = '
@@ -169,6 +151,19 @@ function insertImageNewsIntoBD ($nomImage, $url){
         $stmt->bindValue(':contenu', $contenuActu, PDO::PARAM_STR);
         $stmt->bindValue(':type', $typeActu, PDO::PARAM_STR);
         $stmt->bindValue(':image', $idImage, PDO::PARAM_INT);
+        $stmt->bindValue(':idActualite', $idActualite, PDO::PARAM_INT);
+        $resultat = $stmt->execute();
+        $stmt->closeCursor();
+        if($resultat >0) return true;
+        return false;
+    }
+
+    function deleteActuFromBD($idActualite){
+        $bdd = connexionPDO();
+        $req = '
+        DELETE FROM actualite WHERE id_actualite = :idActualite;
+        ';
+        $stmt = $bdd->prepare($req);
         $stmt->bindValue(':idActualite', $idActualite, PDO::PARAM_INT);
         $resultat = $stmt->execute();
         $stmt->closeCursor();
