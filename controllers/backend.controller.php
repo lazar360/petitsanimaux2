@@ -66,7 +66,7 @@ function getPagePensionnaireAdmin($require ="", $alert="",$alertType="",$data=""
       $description = "Page de gestion des pensionnaires";
 
       $statuts = getStatutsAnimal();
-      //$caracteres = getListeCaracteresAnimal();
+      $caracteres = getListeCaracteresAnimal();
 
       $contentAdminAction="";
       if($require !=="") require_once $require;
@@ -102,15 +102,17 @@ function getPagePensionnaireAdminAjout(){
       
       $fileImage = $_FILES['imageActu'];
       $repertoire = "public/sources/images/sites/animaux/".$type."/".strtolower($nom)."/";
-      $idAnimal = insertAnimalIntoBD($nom,$puce,$dateN,$type,$sexe,$statut,$amiChien,$amiChat,$amiEnfant,$description,$adoptionDesc,$localisation,$engagement);
+
+      //$idAnimal = insertAnimalIntoBD($nom,$puce,$dateN,$type,$sexe,$statut,$amiChien,$amiChat,$amiEnfant,$description,$adoptionDesc,$localisation,$engagement);
 
       try{
           
           $nomImage = ajoutImage($fileImage, $repertoire, $nom);
           $idImage = insertImageIntoBD($nomImage, "animaux/".$type."/".strtolower($nom)."/".$nomImage);
           $idAnimal = insertAnimalIntoBD($nom,$puce,$dateN,$type,$sexe,$statut,$amiChien,$amiChat,$amiEnfant,$description,$adoptionDesc,$localisation,$engagement);
+          
           if($idAnimal >0){
-              //insertIntoContient($idImage,$idAnimal);
+              insertIntoContient($idImage,$idAnimal);
               //insertIntoDispose($caractere1,$idAnimal);
               if($caractere2 !== $caractere1){
                   //insertIntoDispose($caractere2,$idAnimal);
