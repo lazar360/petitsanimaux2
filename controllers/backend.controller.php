@@ -96,9 +96,9 @@ function getPagePensionnaireAdminAjout(){
       $adoptionDesc = Securite::secureHTML($_POST['adoptionDesc']);
       $localisation = Securite::secureHTML($_POST['localisation']);
       $engagement = Securite::secureHTML($_POST['engagement']);
-      $caractere1 = 'gentil' ; //Securite::secureHTML($_POST['caractere1']);
-      $caractere2 = 'doux' ; //Securite::secureHTML($_POST['caractere2']);
-      $caractere3 = 'calme';//Securite::secureHTML($_POST['caractere3']);
+      $caractere1 = Securite::secureHTML($_POST['caractere1']);
+      $caractere2 = Securite::secureHTML($_POST['caractere2']);
+      $caractere3 = Securite::secureHTML($_POST['caractere3']);
       
       $fileImage = $_FILES['imageActu'];
       $repertoire = "public/sources/images/sites/animaux/".$type."/".strtolower($nom)."/";
@@ -113,12 +113,12 @@ function getPagePensionnaireAdminAjout(){
           
           if($idAnimal >0){
               insertIntoContient($idImage,$idAnimal);
-              //insertIntoDispose($caractere1,$idAnimal);
+              insertIntoDispose($caractere1,$idAnimal);
               if($caractere2 !== $caractere1){
-                  //insertIntoDispose($caractere2,$idAnimal);
+              insertIntoDispose($caractere2,$idAnimal);
               }
               if($caractere3 !== $caractere2 && $caractere3 !== $caractere1){
-                 // insertIntoDispose($caractere3,$idAnimal);
+              insertIntoDispose($caractere3,$idAnimal);
               }
               $alert = "La création de l'animal est effectuée";
               $alertType = ALERT_SUCCESS;
