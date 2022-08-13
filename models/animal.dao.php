@@ -93,6 +93,18 @@ function getStatutsAnimal(){
     return $statuts;
 }
 
+function getListeCaracteresAnimal(){
+    $bdd = connexionPDO();
+    $req = '
+    SELECT * 
+    FROM caractere';
+    $stmt = $bdd->prepare($req);
+    $stmt->execute();
+    $caracteres = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $stmt->closeCursor();
+    return $caracteres;
+}
+
 function insertAnimalIntoBD($nom,$puce,$dateN,$type,$sexe,$statut,$amiChien,$amiChat,$amiEnfant,$description,$adoptionDesc,$localisation,$engagement){
     $bdd = connexionPDO();
     $req = '
@@ -120,4 +132,59 @@ function insertAnimalIntoBD($nom,$puce,$dateN,$type,$sexe,$statut,$amiChien,$ami
     $resultat = $bdd->lastInsertId();
     $stmt->closeCursor();
     return $resultat;
+}
+
+function insertIntoContient($idImage,$idAnimal){
+    $bdd = connexionPDO();
+    $req = '
+    INSERT INTO contient values(:idImage, :idAnimal)
+    ';
+    $stmt = $bdd->prepare($req);
+    $stmt->bindValue(":idImage",$idImage,PDO::PARAM_INT);
+    $stmt->bindValue(":idAnimal",$idAnimal,PDO::PARAM_INT);
+    $stmt->execute();
+    $stmt->closeCursor();
+}
+
+function insertIntoDispose($caractere,$idAnimal){
+    $bdd = connexionPDO();
+    $req = '
+    INSERT INTO dispose values(:idcaractere, :idAnimal)
+    ';
+    $stmt = $bdd->prepare($req);
+    $stmt->bindValue(":idcaractere",$caractere,PDO::PARAM_INT);
+    $stmt->bindValue(":idAnimal",$idAnimal,PDO::PARAM_INT);
+    $stmt->execute();
+    $stmt->closeCursor();
+}
+
+function getAnimauxFromTypeAndStatut($idStatut,$type){
+
+    $bdd = connexionPDO();
+    $req = '
+    SELECT * 
+    FROM animal 
+    where id_statut = :idStatut and type_animal = :type';
+    $stmt = $bdd->prepare($req);
+    $stmt->bindValue(":idStatut",$idStatut,PDO::PARAM_INT);
+    $stmt->bindValue(":type",$type,PDO::PARAM_STR);
+    $stmt->execute();
+    $animaux = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $stmt->closeCursor();
+    return $animaux;
+
+}
+
+function getAnimalCaracteresBD($idAnimal){
+    $bdd = connexionPDO();
+    $req = '
+    SELECT * 
+    FROM dispose 
+    where id_animal = :idAnimal';
+    $stmt = $bdd->prepare($req);
+    $stmt->bindValue(":idAnimal",$idAnimal,PDO::PARAM_INT);
+    $stmt->execute();
+    $animaux = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $stmt->closeCursor();
+    return $animaux;
 }
