@@ -66,6 +66,9 @@ function getPagePensionnaireAdmin($require ="", $alert="",$alertType="",$data=""
       $description = "Page de gestion des pensionnaires";
 
       $statuts = getStatutsAnimal();
+      
+      /* A enlever : print_r($statuts); exit;*/
+     
       $caracteres = getListeCaracteresAnimal();
 
       $contentAdminAction="";
@@ -103,8 +106,6 @@ function getPagePensionnaireAdminAjout(){
       $fileImage = $_FILES['imageActu'];
       $repertoire = "public/sources/images/sites/animaux/".$type."/".strtolower($nom)."/";
 
-      //$idAnimal = insertAnimalIntoBD($nom,$puce,$dateN,$type,$sexe,$statut,$amiChien,$amiChat,$amiEnfant,$description,$adoptionDesc,$localisation,$engagement);
-
       try{
           
           $nomImage = ajoutImage($fileImage, $repertoire, $nom);
@@ -140,7 +141,24 @@ function getPagePensionnaireAdminModif(){
   $alertType="";
   $data = [];
  
-  
+  if(isset($_POST['etape']) && (int)$_POST['etape']>=3){
+    $idStatut = Securite::secureHTML($_POST['statutAnimal']);
+    $type = Securite::secureHTML($_POST['typeAnimal']);
+    $data['animaux'] = getAnimauxFromTypeAndStatut($idStatut,$type);
+          /* A enlever : echo"<pre>"; print_r($data['animaux']); exit;*/
+}
+
+if(isset($_POST['etape']) && (int)$_POST['etape']>=4){
+  $idAnimal = Securite::secureHTML($_POST['animal']);
+  $data['animal'] = getAnimalFromIdAnimalBD((int) $idAnimal);
+  /* A enlever : echo"<pre>"; print_r($data['animal']); exit;*/
+
+  $caracteres = getAnimalCaracteresBD((int) $idAnimal);
+  $data['animal']['caractere1'] = $caracteres[0];
+  if(count($caracteres)>1) $data['animal']['caractere2'] = $caracteres[1];
+  if(count($caracteres)>2) $data['animal']['caractere3'] = $caracteres[2];
+}
+
   getPagePensionnaireAdmin("views/back/adminPensionnaireModif.view.php", $alert, $alertType, $data); 
 }
 
@@ -226,8 +244,6 @@ function getPageNewsAdminModif(){
     
     if (isset($_POST['etape'])  
     && (int)$_POST['etape']>=4){
-      //print_r($data['actualites']); exit();
-      //print_r($data['actualites'][0]); exit();
 
       $titreActu = Securite::secureHTML($_POST['titreActu']);
       $typeActu = Securite::secureHTML($_POST['typeActu']);
@@ -236,7 +252,6 @@ function getPageNewsAdminModif(){
       $idActualite = $data['actualites'][0]['id_actualite'];
       
       try{
-        // A compléter :
         if($_FILES['imageActu']['size'] > 0) {
           $fileImage = $_FILES['imageActu'];
           $repertoire = "public/sources/images/sites/news/";
