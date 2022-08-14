@@ -145,18 +145,85 @@ function getPagePensionnaireAdminModif(){
     $idStatut = Securite::secureHTML($_POST['statutAnimal']);
     $type = Securite::secureHTML($_POST['typeAnimal']);
     $data['animaux'] = getAnimauxFromTypeAndStatut($idStatut,$type);
-          /* A enlever : echo"<pre>"; print_r($data['animaux']); exit;*/
 }
 
 if(isset($_POST['etape']) && (int)$_POST['etape']>=4){
   $idAnimal = Securite::secureHTML($_POST['animal']);
   $data['animal'] = getAnimalFromIdAnimalBD((int) $idAnimal);
-  /* A enlever : echo"<pre>"; print_r($data['animal']); exit;*/
-
   $caracteres = getAnimalCaracteresBD((int) $idAnimal);
-  $data['animal']['caractere1'] = $caracteres[0];
+  if(count($caracteres)>0) $data['animal']['caractere1'] = $caracteres[0];
   if(count($caracteres)>1) $data['animal']['caractere2'] = $caracteres[1];
   if(count($caracteres)>2) $data['animal']['caractere3'] = $caracteres[2];
+
+  $data['animal']['images'] = getImagesFromAnimal($idAnimal); 
+}
+
+if(isset($_POST['etape']) && (int)$_POST['etape']>=5){
+  $idAnimal= $data['animal']['id_animal'];
+  $nom = Securite::secureHTML($_POST['nom']);
+  $puce = Securite::secureHTML($_POST['puce']);
+  $dateN = Securite::secureHTML($_POST['dateN']);
+  $typeSaisie = Securite::secureHTML($_POST['type']);
+  $sexe = Securite::secureHTML($_POST['sexe']);
+  $statut = Securite::secureHTML($_POST['statut']);
+  $amiChien = Securite::secureHTML($_POST['amiChien']);
+  $amiChat = Securite::secureHTML($_POST['amiChat']);
+  $amiEnfant = Securite::secureHTML($_POST['amiEnfant']);
+  $description = Securite::secureHTML($_POST['description']);
+  $adoptionDesc = Securite::secureHTML($_POST['adoptionDesc']);
+  $localisation = Securite::secureHTML($_POST['localisation']);
+  $engagement = Securite::secureHTML($_POST['engagement']);
+  $caractere1 = Securite::secureHTML($_POST['caractere1']);
+  $caractere2 = Securite::secureHTML($_POST['caractere2']);
+  $caractere3 = Securite::secureHTML($_POST['caractere3']);
+
+  $imagesToDel = Securite::secureHTML($_POST['imgToDelete']);
+  $nbImageToAdd = Securite::secureHTML($_POST['nbImage']);
+
+  try{
+
+    $idImagesSplited = explode("-", $imagesToDel);
+
+    for ($i=0; $i<count($idImagesSplited); $i++ ){
+      deleteImagesFromAnimal($idImagesSplited[$i], $idAnimal);
+    }
+    if($nbImageToAdd > 0){
+      $repertoire = "public/sources/images/sites/animaux/".$type."/".strtolower($nom)."/";
+      for($i=0 ; $i < $nbImageToAdd ; $i++){
+          $fileImage = $_FILES['image'.$i];
+          if($_FILES['image'.$i]['size'] > 0){
+              $nomImage = ajoutImage($fileImage, $repertoire, $nom);
+              $idImage = insertImageIntoBD($nomImage, "animaux/".$type."/".strtolower($nom)."/".$nomImage);
+              insertIntoContient($idImage,$idAnimal);
+          }
+      }
+  }
+
+    if(updateAnimalIntoBD($idAnimal,$nom,$puce,$dateN,$typeSaisie,$sexe,$statut,$amiChien,$amiChat,$amiEnfant,$description, $adoptionDesc, $localisation, $engagement)){
+        deleteCaractereFromAnimalBD($idAnimal);
+        insertIntoDispose($caractere1,$idAnimal);
+        if($caractere2 !== $caractere1){
+            insertIntoDispose($caractere2,$idAnimal);
+        }
+        if($caractere3 !== $caractere2 && $caractere3 !== $caractere1){
+            insertIntoDispose($caractere3,$idAnimal);
+        }
+        $alert = "La modification de l'animal est effectuée";
+        $alertType = ALERT_SUCCESS;
+    } else {
+       throw new Exception("La modification en BD n'a pas fonctionné");
+    }
+} catch(Exception $e){
+    $alert = "La modification de l'animal n'a pas fonctionnée <br />". $e->getMessage();
+    $alertType = ALERT_DANGER;
+}
+$data['animal'] = getAnimalFromIdAnimalBD((int) $idAnimal);
+$caracteres = getAnimalCaracteresBD((int) $idAnimal);
+if(count($caracteres)>0) $data['animal']['caractere1'] = $caracteres[0];
+if(count($caracteres)>1) $data['animal']['caractere2'] = $caracteres[1];
+if(count($caracteres)>2) $data['animal']['caractere3'] = $caracteres[2];
+$data['animal']['images'] = getImagesFromAnimal($idAnimal); 
+
 }
 
   getPagePensionnaireAdmin("views/back/adminPensionnaireModif.view.php", $alert, $alertType, $data); 
@@ -164,10 +231,22 @@ if(isset($_POST['etape']) && (int)$_POST['etape']>=4){
 
 function getPagePensionnaireAdminSup(){
   $alert = "";
-  $alertType = "";
-  
-  
-  getPagePensionnaireAdmin("", $alert, $alertType); 
+  $alertType="";
+
+  if(isset($_GET['sup'])){
+      try{
+          if(deleteAnimalFromBD(Securite::secureHTML($_GET['sup']))<1){
+              throw new Exception ("la suppressio n'a pas fonctionné en BD");
+          }
+          $alert = "La suppression de l'animal a fonctionnée";
+          $alertType = ALERT_SUCCESS;
+      } catch(Exception $e){
+          $alert = "La suppression de l'animal n'a pas fonctionnée";
+          $alertType = ALERT_DANGER;
+      }
+  }
+ 
+  getPagePensionnaireAdmin("",$alert,$alertType);
 }
 
 
@@ -182,6 +261,8 @@ function getPageNewsAdmin($require ="", $alert="",$alertType="", $data=""){
 
       $typeActualites = getTypesActualite();
 
+      $imagesBD = getAllImagesFromBD();
+      //echo"<pre>";print_r($imagesBD); exit;
       $contentAdminAction="";
       if($require !=="") require_once $require;
       require_once "views/back/adminNews.view.php";
@@ -205,6 +286,14 @@ function getPageNewsAdminAjout(){
       $repertoire = "public/sources/images/sites/news/";
       $date = date("Y-m-d H:i:s", time());
       try{
+
+        if(isset($_POST['imageMultimedia']) && !empty($_POST['imageMultimedia']) && $_POST['imageMultimedia'] !==""){
+          $idImage = (int) Securite::secureHTML($_POST['imageMultimedia']);
+      } else {
+          $nomImage = ajoutImage($fileImage, $repertoire, $titreActu);
+          $idImage = insertImageIntoBD($nomImage, "news/".$nomImage);
+      }
+
           $nomImage = ajoutImage($fileImage, $repertoire, $titreActu);
           $idImage=insertImageIntoBD($nomImage, "news/".$nomImage);
 
