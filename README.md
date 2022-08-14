@@ -20,7 +20,6 @@ Users can do the following :
 <ul>
     <li>Consult the page of association</li>
     <li>See pets for adoption </li>
-    <li>See pets for adoption </li>
     <li>check in on adopted animals </li>
     <li>Learn everything on pet health care</li>
     <li>Manage all web pages with a backend</li>
