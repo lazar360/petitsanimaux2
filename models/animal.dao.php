@@ -188,3 +188,71 @@ function getAnimalCaracteresBD($idAnimal){
     $stmt->closeCursor();
     return $animaux;
 }
+
+function updateAnimalIntoBD($idAnimal,$nom,$puce,$dateN,$typeSaisie,$sexe,$statut,$amiChien,$amiChat,$amiEnfant,$description, $adoptionDesc, $localisation, $engagement){
+    $bdd = connexionPDO();
+    $req = '
+    update animal
+    set nom_animal = :nom, type_animal = :type, puce=:puce, sexe=:sexe, date_naissance_animal=:dateN,
+    ami_chien = :amiChien, ami_chat = :amiChat,ami_enfant = :amiEnfant, description_animal = :description,
+    adoption_description_animal = :adoptionDesc, localisation_description_animal= :localisation,
+    engagement_description_animal = :engagement, id_statut = :statut
+    where id_animal = :idAnimal
+    ';
+    $stmt = $bdd->prepare($req);
+    $stmt->bindValue(":idAnimal",$idAnimal,PDO::PARAM_INT);
+    $stmt->bindValue(":nom",$nom,PDO::PARAM_STR);
+    $stmt->bindValue(":type",$typeSaisie,PDO::PARAM_STR);
+    $stmt->bindValue(":puce",$puce,PDO::PARAM_STR);
+    $stmt->bindValue(":sexe",$sexe,PDO::PARAM_INT);
+    $stmt->bindValue(":dateN",$dateN,PDO::PARAM_STR);
+    $stmt->bindValue(":amiChien",$amiChien,PDO::PARAM_STR);
+    $stmt->bindValue(":amiChat",$amiChat,PDO::PARAM_STR);
+    $stmt->bindValue(":amiEnfant",$amiEnfant,PDO::PARAM_STR);
+    $stmt->bindValue(":description",$description,PDO::PARAM_STR);
+    $stmt->bindValue(":adoptionDesc",$adoptionDesc,PDO::PARAM_STR);
+    $stmt->bindValue(":localisation",$localisation,PDO::PARAM_STR);
+    $stmt->bindValue(":engagement",$engagement,PDO::PARAM_STR);
+    $stmt->bindValue(":statut",$statut,PDO::PARAM_INT);
+    $resultat = $stmt->execute();
+    $stmt->closeCursor();
+    if($resultat > 0) return true;
+    return false;
+}
+
+function deleteCaractereFromAnimalBD($idAnimal){
+    $bdd = connexionPDO();
+    $req = '
+    delete FROM dispose 
+    where id_animal = :idAnimal';
+    $stmt = $bdd->prepare($req);
+    $stmt->bindValue(":idAnimal",$idAnimal,PDO::PARAM_INT);
+    $stmt->execute();
+    $stmt->closeCursor();
+}
+
+function deleteAnimalFromBD($idAnimal){
+    $bdd = connexionPDO();
+    $req = '
+    delete FROM animal 
+    where id_animal = :idAnimal';
+    $stmt = $bdd->prepare($req);
+    $stmt->bindValue(":idAnimal",$idAnimal,PDO::PARAM_INT);
+    $resultat = $stmt->execute();
+    $stmt->closeCursor();
+    return $resultat;
+}
+
+function deleteImagesFromAnimal($idImage,$idAnimal){
+    $bdd = connexionPDO();
+    $req = '
+    delete FROM contient 
+    where id_animal = :idAnimal and id_image = :idImage
+    ';
+    $stmt = $bdd->prepare($req);
+    $stmt->bindValue(":idAnimal",$idAnimal,PDO::PARAM_INT);
+    $stmt->bindValue(":idImage",$idImage,PDO::PARAM_INT);
+    $resultat = $stmt->execute();
+    $stmt->closeCursor();
+    return $resultat;
+}
