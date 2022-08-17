@@ -23,10 +23,8 @@ echo (styleTitreNiveau2("Ajout d'une News", COLOR_ASSO))
         <label for="contenuActu">Contenu de l'actualité :</label>
         <textarea class="form-control" name="contenuActu" id="contenuActu" rows="5" required></textarea>
     </div>
-    <div class="form-group">
-        <label for="imageActu">Image : </label>
-        <input type="file" class="form-control-file" name="imageActu" id="imageActu">
-    </div>
+    
+    <?php require "imagesNewsManager.view.php" ?>
 
     <div class="row no-guters">
         <input type="submit" value="Valider" class="btn btn-primary col">
