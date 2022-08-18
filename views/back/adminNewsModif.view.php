@@ -83,7 +83,7 @@ echo (styleTitreNiveau3("Choix", COLOR_ASSO));
 
     </div>
 </form>
-
+<script src="public/js/verificationSuppressionActualite.js"></script>
 <?php } ?>
 
 
