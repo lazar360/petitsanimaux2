@@ -1,5 +1,4 @@
 <?php ob_start();  ?>
-
 <?= styleTitreNiveau1($animal['nom_animal'], COLOR_PENSIONNAIRE) ?>
 <div class='row border border-dark rounded-lg m-2 align-items-center <?= ($animal['sexe']) ? "perso_bgGreen" : "perso_bgRose" ?>'>
     <div class="col p-2 text-center">
@@ -7,13 +6,13 @@
     </div>
     <?php 
         $iconeChien = "";
-        if($animal['ami_chien'] === "oui") $iconeChien = "ChienOk";
-        else if($animal['ami_chien'] === "non") $iconeChien = "ChienBar";
-        else if($animal['ami_chien'] === "N/A") $iconeChien = "ChienQuest";
+        if($animal['ami_chien'] === "oui") $iconeChien = "chienOk";
+        else if($animal['ami_chien'] === "non") $iconeChien = "chienBar";
+        else if($animal['ami_chien'] === "N/A") $iconeChien = "chienQuest";
         $iconeChat = "";
-        if($animal['ami_chat'] === "oui") $iconeChat = "ChatOk";
-        else if($animal['ami_chat'] === "non") $iconeChat = "ChatBar";
-        else if($animal['ami_chat'] === "N/A") $iconeChat = "ChatQuest";
+        if($animal['ami_chat'] === "oui") $iconeChat = "chatOk";
+        else if($animal['ami_chat'] === "non") $iconeChat = "chatBar";
+        else if($animal['ami_chat'] === "N/A") $iconeChat = "chatQuest";
         $inconeEnfant = "";
         if($animal['ami_enfant'] === "oui") $inconeEnfant = "babyOk";
         else if($animal['ami_enfant'] === "non") $inconeEnfant = "babyBar";
@@ -85,7 +84,7 @@
         <hr />
         <div>
             <img src="<?= URL ?>public/sources/images/Autres/icones/iconeContrat.png" alt="" width="50" height="50" class="d-block mx-auto">
-            <?= $animal['engagemet_description_animal']?>
+            <?= $animal['engagement_description_animal']?>
         </div>
     </div>
 </div>
