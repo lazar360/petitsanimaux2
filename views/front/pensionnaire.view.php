@@ -6,7 +6,6 @@ echo(styleTitreNiveau1($titreH1, COLOR_PENSIONNAIRE));
 
 <div class="row no-gutters">
     <?php foreach ($animaux as $animal) : ?>
-        
         <div class="col-12 col-lg-6">
             <div class="row border-dark rounded-lg m-2 align-items-center <?= ($animal['sexe']) ? "perso_bgBleu" : "perso_bgRose" ?>" style="height: 200px;">
                 <div class="col p-2 text-center">
